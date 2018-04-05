@@ -1,5 +1,5 @@
-.App {
-  text-align: center;
+body {
+  font-size: 100%;
 }
 
 .App-logo {
@@ -25,4 +25,30 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.btn-group {
+  list-style: none;
+  text-align: right;
+  margin: 0 auto;
+  padding: 0;
+  width: 66.66%;
+  max-width: 750px;
+}
+
+.btn-group li {
+  display: inline-block;
+  padding: 0.5em;
+  margin: 0.25em;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: border 0.3s ease-in;
+}
+
+.btn-group li:hover {
+  border-bottom: 3px solid #bfbfbf;
+}
+
+.btn-group li.selected {
+  border-bottom: 3px solid rgba(0,0,0,0.7);
 }

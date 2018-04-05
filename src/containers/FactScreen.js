@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import './FactScreen.css';
+import ButtonGroup from '../components/ButtonGroup';
+import Card from '../components/Card';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
 // import ListView from '../components/ListView';
@@ -21,15 +23,23 @@ class FactScreen extends Component {
 
   componentDidMount() {
     console.log('mounted');
-    this.props.dispatch(factsActions.fetchFact(1, 'trivia'));
+    this.props.dispatch(factsActions.fetchFact());
   }
 
   render() {
     if (!this.props.currentFact) return this.renderLoading();
     return (
       <div className="FactScreen">
-        {this.props.currentFact.text}
-        {this.props.currentFact.number}
+        <Card
+          leftSide={this.props.currentFact.number}
+          rightSide={this.props.currentFact.text}
+        />
+
+        <ButtonGroup
+          buttons={['trivia', 'year', 'date', 'math']}
+          selected={this.props.currentFilter}
+        />
+
       </div>
     );
   }
