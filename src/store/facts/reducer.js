@@ -38,6 +38,10 @@ export function getFact(state) {
   return state.facts;
 }
 
+export function getFilter(state) {
+  return state.facts.type;
+}
+
 // export function getPosts(state) {
 //   const currentFilter = state.posts.currentFilter;
 //   const postsById = state.posts.postsById;

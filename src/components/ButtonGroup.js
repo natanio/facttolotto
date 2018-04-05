@@ -1,30 +1,28 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-import Button from './Button';
 
 export default class ButtonGroup extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    console.log(this.props);
   }
 
   render() {
     return (
       <ul className="btn-group">
-        {this.renderButtons()}
+        {_.map(this.props.buttons, this.renderBtnById)}
       </ul>
     );
   }
 
-  renderButtons() {
-    return (
-      this.props.buttons.map((btn) => 
-        <Button 
-          selected={this.props.selected === btn}
-          text={btn}
-        />
-      )
-    )
+  renderBtnById(id) {
+    console.log('rendering list items');
+    console.log(id);
+    if (typeof this.props.renderButton === 'function') {
+      return this.props.renderButton(id);
+    }
   }
 
 }

@@ -8,6 +8,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import './FactScreen.css';
 import ButtonGroup from '../components/ButtonGroup';
+import Button from '../components/Button';
 import Card from '../components/Card';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
@@ -37,7 +38,7 @@ class FactScreen extends Component {
 
         <ButtonGroup
           buttons={['trivia', 'year', 'date', 'math']}
-          selected={this.props.currentFilter}
+          renderButton={this.renderButton}
         />
 
       </div>
@@ -49,6 +50,25 @@ class FactScreen extends Component {
     return (
       <p>Loading...</p>
     );
+  }
+
+  renderButton(filter) {
+    const selected = this.props.currentFilter === filter;
+    return (
+      <Button
+        key={filter} 
+        selected={selected}
+        text={filter}
+        onClick={this.onFilterClick}
+      />
+    )
+  }
+
+  onFilterClick(category) {
+    console.log(JSON.stringify(category));
+    const { number } = this.props.currentFact;
+    this.props.dispatch(factsActions.fetchFact(number, category));
+    console.log(`update the fact with ${number} and ${category}`);
   }
 
 }
