@@ -65,7 +65,6 @@ class FactScreen extends Component {
   }
 
   onFilterClick(category) {
-    console.log(JSON.stringify(category));
     const { number } = this.props.currentFact;
     this.props.dispatch(factsActions.fetchFact(number, category));
     console.log(`update the fact with ${number} and ${category}`);
