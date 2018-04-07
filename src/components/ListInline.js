@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 
-export default class ButtonGroup extends Component {
+export default class ListInline extends Component {
   constructor(props) {
     super(props);
     autoBind(this);
@@ -12,7 +12,7 @@ export default class ButtonGroup extends Component {
   render() {
     return (
       <ul className="btn-group">
-        {_.map(this.props.buttons, this.renderBtnById)}
+        {_.map(this.props.items, this.renderBtnById)}
       </ul>
     );
   }
@@ -20,8 +20,8 @@ export default class ButtonGroup extends Component {
   renderBtnById(id) {
     console.log('rendering list items');
     console.log(id);
-    if (typeof this.props.renderButton === 'function') {
-      return this.props.renderButton(id);
+    if (typeof this.props.renderItem === 'function') {
+      return this.props.renderItem(id);
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 
-export default class Button extends Component {
+export default class ListItem extends Component {
   constructor(props) {
     super(props);
     autoBind(this);

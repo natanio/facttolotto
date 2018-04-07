@@ -7,8 +7,8 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import './FactScreen.css';
-import ButtonGroup from '../components/ButtonGroup';
-import Button from '../components/Button';
+import ListInline from '../components/ListInline';
+import ListItem from '../components/ListItem';
 import Card from '../components/Card';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
@@ -36,9 +36,9 @@ class FactScreen extends Component {
           rightSide={this.props.currentFact.text}
         />
 
-        <ButtonGroup
-          buttons={['date', 'trivia', 'year', 'math']}
-          renderButton={this.renderButton}
+        <ListInline
+          items={['date', 'trivia', 'year', 'math']}
+          renderItem={this.renderItem}
         />
 
       </div>
@@ -52,10 +52,10 @@ class FactScreen extends Component {
     );
   }
 
-  renderButton(filter) {
+  renderItem(filter) {
     const selected = this.props.currentFilter === filter;
     return (
-      <Button
+      <ListItem
         key={filter} 
         selected={selected}
         text={filter}
