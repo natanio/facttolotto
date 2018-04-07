@@ -9,7 +9,7 @@ const NUMBER_ENDPOINT = 'http://numbersapi.com';
 class NumberService {
 
   async getFact(number, category) {
-    const url = `${NUMBER_ENDPOINT}/${number}/${category}?notfound=floor&json`;
+    const url = `${NUMBER_ENDPOINT}/${number}/${category}?json`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {

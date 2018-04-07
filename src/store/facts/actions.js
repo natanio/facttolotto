@@ -22,7 +22,7 @@ import * as factsSelectors from '../facts/reducer';
 //   }
 // }
 
-export function fetchFact(number, category = 'trivia') {
+export function fetchFact(number, category = 'date') {
   if (!number) {
     number = Math.floor(Math.random() * 20000);
   }

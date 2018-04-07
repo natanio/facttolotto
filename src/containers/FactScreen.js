@@ -37,7 +37,7 @@ class FactScreen extends Component {
         />
 
         <ButtonGroup
-          buttons={['trivia', 'year', 'date', 'math']}
+          buttons={['date', 'trivia', 'year', 'math']}
           renderButton={this.renderButton}
         />
 
