@@ -7,10 +7,9 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
-import * as factsSelectors from '../facts/reducer';
 
 const initialState = Immutable({
-  currentFilter: 'trivia',
+  currentFilter: undefined,
   currentFact: undefined
 });
 

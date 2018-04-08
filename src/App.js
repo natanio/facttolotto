@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as factsSelectors from './store/facts/reducer';
+import * as numbersSelectors from './store/numbers/reducer';
 import FactScreen from './containers/FactScreen';
+import NumberLengthSelector from './containers/NumberLengthSelector';
 import './App.css';
 
 class App extends Component {
   render() {
+    console.log(this.props.currentNumber);
     return (
       <div className="App">
+        <NumberLengthSelector />
         <FactScreen />
       </div>
     );
@@ -15,10 +18,13 @@ class App extends Component {
 }
 
 // which props do we want to inject, given the global store state?
-// function mapStateToProps(state) {
-//   return {
-//     isSelectionFinalized: factsSelectors.isTopicSelectionFinalized(state)
-//   };
-// }
+function mapStateToProps(state) {
+  const { currentNumberLength, minValue, maxValue } = numbersSelectors.getCurrentNumberSettings(state);
+  return {
+    currentNumberLength,
+    minValue,
+    maxValue
+  };
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

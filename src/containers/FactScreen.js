@@ -12,8 +12,6 @@ import ListItem from '../components/ListItem';
 import Card from '../components/Card';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
-// import ListView from '../components/ListView';
-// import ListRow from '../components/ListRow';
 
 class FactScreen extends Component {
 
