@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
+import _ from 'lodash';
 
 const initialState = Immutable({
   maxStackLength: 5,
@@ -16,6 +17,10 @@ export default function reduce(state = initialState, action = {}) {
       console.log(`action:`, action)
       switch (action.setting.target) {
         case 'numberLength':
+          console.log(`stack length is: ${state.currentStackFacts}`);
+          if (_.size(state.currentStackFacts) > 0) {
+            if (!window.confirm('This action will remove your current numbers. Are you sure?')) return state;
+          }
           return state.merge({
             maxStackLength: action.setting.value,
             currentStackFacts: {},
