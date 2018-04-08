@@ -2,11 +2,11 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
-  currentNumberLength: 5,
-  minValue: 1,
-  maxValue: 70,
-  currentStackLength: 5,
+  maxStackLength: 5,
+  minStackValue: 1,
+  maxStackValue: 70,
   currentStackFacts: {},
+  remainingStackLength: 5,
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -17,24 +17,27 @@ export default function reduce(state = initialState, action = {}) {
       switch (action.setting.target) {
         case 'numberLength':
           return state.merge({
-            currentNumberLength: action.setting.value,
+            maxStackLength: action.setting.value,
+            currentStackFacts: {},
+            remainingStackLength: action.setting.value,
           });
-        case 'minValue':
+        case 'minStackValue':
           return state.merge({
-            minValue: action.setting.value,
+            minStackValue: action.setting.value,
           });
-        case 'maxValue':
+        case 'maxStackValue':
           return state.merge({
-            maxValue: action.setting.value,
+            maxStackValue: action.setting.value,
           });
       }
     case types.ADD_NUMBER_FACT_TO_STACK:
-      return {
+      const currentStackFacts = Immutable({
         currentStackFacts: {
           ...state.currentStackFacts,
-          [action.number]: action.fact
+        [action.number]: action.fact
         }
-      }
+      });
+      return state.merge(currentStackFacts);
     default:
       return state;
   }

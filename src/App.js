@@ -21,11 +21,11 @@ class App extends Component {
 
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
-  const { currentNumberLength, minValue, maxValue } = numbersSelectors.getCurrentNumberSettings(state);
+  const { maxStackLength, minStackValue, maxStackValue } = numbersSelectors.getCurrentNumberSettings(state);
   return {
-    currentNumberLength,
-    minValue,
-    maxValue
+    maxStackLength,
+    minStackValue,
+    maxStackValue
   };
 }
 

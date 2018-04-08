@@ -24,7 +24,7 @@ class NumberLengthSelector extends Component {
   }
 
   render() {
-    const { currentNumberLength, minValue, maxValue } = this.props;
+    const { maxStackLength, minStackValue, maxStackValue } = this.props;
 
     return (
       <div className="NumberSettingsWrap">
@@ -34,7 +34,7 @@ class NumberLengthSelector extends Component {
             type="number" 
             placeholder="5"
             id="numberLength"
-            value={currentNumberLength}
+            value={maxStackLength}
             onChange={this.updateNumberSettings} />
         </div>
         <div className="formGroup">
@@ -42,14 +42,14 @@ class NumberLengthSelector extends Component {
           <label htmlFor="numberMin">Minimum value</label>
           <input 
             type="number"
-            id="minValue" 
-            value={minValue}
+            id="minStackValue" 
+            value={minStackValue}
             onChange={this.updateNumberSettings}/>
           <label htmlFor="numberMax">Maximum value</label>
           <input 
             type="number" 
-            id="maxValue"
-            value={maxValue}
+            id="maxStackValue"
+            value={maxStackValue}
             onChange={this.updateNumberSettings}/>
         </div>
       </div>
@@ -63,11 +63,11 @@ class NumberLengthSelector extends Component {
 function mapStateToProps(state) {
   console.log(`numbers state:`);
   console.log(state);
-  const { currentNumberLength, minValue, maxValue } = numbersSelectors.getCurrentNumberSettings(state);
+  const { maxStackLength, minStackValue, maxStackValue } = numbersSelectors.getCurrentNumberSettings(state);
   return {
-    currentNumberLength,
-    minValue,
-    maxValue
+    maxStackLength,
+    minStackValue,
+    maxStackValue
   };
 }
 
