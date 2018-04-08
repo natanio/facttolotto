@@ -58,3 +58,30 @@ body {
 .btn-group li.selected {
   border-bottom: 3px solid rgba(0,0,0,0.7);
 }
+
+ul.StackNumbers {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  margin: 2em auto;
+  padding: 0;
+  width: 66.66%;
+}
+
+ul.StackNumbers li {
+  background: white;
+  min-width: 80px;
+  margin: 0 5px;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  font-size: 22px;
+  border-radius: 6px;
+  border: 3px solid rgba(0,0,0,0.1);
+  color: #bfbfbf;
+}
+
+.StackNumbers li.filled {
+  border-color: #1da1ff;
+  color: #525252;
+}

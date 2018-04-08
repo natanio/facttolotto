@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "array-subtract": "^2.0.0",
     "lodash": "^4.17.5",
     "react": "^16.3.1",
     "react-autobind": "^1.0.6",

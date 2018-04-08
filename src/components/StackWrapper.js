@@ -12,10 +12,28 @@ export default class StackWrapper extends Component {
     console.log('Props in StackWrapper');
     console.log(this.props);
     return (
-      <ul className="StackWrapper">
-        {_.map(this.props.currentStackFacts, this.renderItemById)}
-      </ul>
+      <div className="StackWrapper">
+        <h2>Your selected numbers</h2>
+        <ul className="StackNumbers">
+          {_.times(this.props.maxStackLength, this.renderNumberContainer)}
+        </ul>
+        <h3>About your numbers</h3>
+        <ul className="StackFacts">
+          {_.map(this.props.currentStackFacts, this.renderItemById)}
+        </ul>
+      </div>
     );
+  }
+
+  renderNumberContainer(key) {
+    console.log('what are these stack numbers?');
+    console.log(key);
+    if (typeof this.props.renderStackNumber === 'function') {
+      let number = this.props.stackNumbers[key];
+      console.log(number);
+      console.log(this.props.stackNumbers);
+      return this.props.renderStackNumber(key, number);
+    }
   }
 
   renderItemById(value, key) {

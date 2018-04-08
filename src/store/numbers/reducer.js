@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 import _ from 'lodash';
+import ArraySubtract from 'array-subtract';
 
 const initialState = Immutable({
   maxStackLength: 5,
@@ -53,4 +54,96 @@ export default function reduce(state = initialState, action = {}) {
 export function getCurrentNumberSettings(state) {
   console.log('In numbers reducer');
   return state.numbers;
+}
+
+export function getCurrentStackNumbers(state) {
+  console.log('inside number formatter');
+  // determine what number of digits are allowed
+  // based on the user input. 1-70 would allow 1 and two digit numbers up to 70.
+  // But 10-70 would only allow two digit numbers up to 70
+  const { maxStackLength, minStackValue, maxStackValue, currentStackFacts } = state.numbers;
+  const allowedDigitLength = () => {
+    let minLength = minStackValue.toString().length;
+    let maxLength = maxStackValue.toString().length;
+    console.log(`min length: ${minLength}`);
+    console.log(`max length: ${maxLength}`);
+
+    if (minLength < maxLength) {
+      return parseInt(maxLength);
+    }
+    return parseInt(minLength);
+  };
+
+  // Placeholder for numbers
+  let numbers = [];
+  let subtract = new ArraySubtract((a, b) => { return a === b });
+  let formattedNumbers = [];
+  let leftoverNumbers = [];
+
+  console.log(currentStackFacts);
+  _.map(_.keys(currentStackFacts), (number) => {
+    console.log('key in current stack numbers');
+    console.log(number);
+    numbers.push(number.toString());
+  });
+
+  _.map(numbers, (number) => {
+    // formatNumber(number);
+    console.log(`Number in formatter: ${number}`);
+    let splitNumber = number.split('');
+    console.log(splitNumber);
+    // Remove from the split number array. Add left over to next remaining numbers.
+    let numbersToCombine = splitNumber.slice(0, allowedDigitLength());
+    let combinedNumber = numbersToCombine.join('');
+    // let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
+    let usedNumbers = splitNumber.splice(0,numbersToCombine.length); // to track used numbers
+    let unusedNumbers = splitNumber; // for easy reading
+    console.log(`unused numbers:`);
+    console.log(unusedNumbers);
+    formattedNumbers.push(combinedNumber);
+
+    do {
+      if (unusedNumbers.length > allowedDigitLength) {
+        console.log('going to format unused numbers top');
+        numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
+        combinedNumber = numbersToCombine.join('');
+        usedNumbers = numbersToCombine.splice(0,numbersToCombine.length); // to track used numbers
+        unusedNumbers = numbersToCombine;
+        formattedNumbers.push(combinedNumber);
+      } else if (unusedNumbers.length > 0) {
+        console.log('going to format unused numbers bottom');
+        numbersToCombine = unusedNumbers.join('');
+        formattedNumbers.push(numbersToCombine);
+        unusedNumbers = []; // clear the array
+      } else {
+        unusedNumbers = []; // clear the array
+      }
+    }
+    while (unusedNumbers.length > 0);
+  });
+
+  // function formatNumber(number) {
+  //   console.log('formatting number');
+  //   let splitNumber = number.split('');
+  //   // Remove from the split number array. Add left over to next remaining numbers.
+  //   let numbersToCombine = splitNumber.slice(0, allowedDigitLength);
+  //   let combinedNumber = numbersToCombine.join('');
+  //   let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
+  //   formattedNumbers.push(combinedNumber);
+
+  //   do {
+  //     if (unusedNumbers.length > allowedDigitLength) {
+  //       numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
+  //       combinedNumber = numbersToCombine.join('');
+  //       formattedNumbers.push(combinedNumber);
+  //       unusedNumbers = subtract.sub(unusedNumbers, numbersToCombine);
+  //     } else {
+  //       numbersToCombine = splitNumber;
+  //       formattedNumbers.push(combinedNumber);
+  //     }
+  //   }
+  //   while (unusedNumbers.length > 0);
+  // }
+  console.log(formattedNumbers);
+  return formattedNumbers;
 }

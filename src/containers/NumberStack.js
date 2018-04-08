@@ -10,15 +10,30 @@ class NumberStack extends Component {
   render() {
     return (
       <StackWrapper
+        maxStackLength={this.props.maxStackLength}
+        stackNumbers={this.props.stackNumbers}
+        renderStackNumber={this.renderStackNumber}
         currentStackFacts={this.props.currentStackFacts}
         renderStackItem={this.renderStackItem}
       />
     );
   }
 
+  renderStackNumber(key, number) {
+    console.log('Stack number:');
+    console.log(number);
+    return (
+      <li
+        key={key}
+        className={number ? 'filled' : ''}>
+        {number ? number:key + 1}
+      </li>
+    );
+  }
+
   renderStackItem(number, fact) {
-    console.log('Stack item:');
-    console.log(fact);
+    // console.log('Stack item:');
+    // console.log(fact);
     return(
       <li
         className="StackItem"
@@ -32,12 +47,16 @@ class NumberStack extends Component {
 }
 
 function mapStateToProps(state) {
-  const { currentStackLength, currentStackFacts } = numbersSelectors.getCurrentNumberSettings(state);
+  const { maxStackLength, currentStackFacts } = numbersSelectors.getCurrentNumberSettings(state);
+  const stackNumbers = numbersSelectors.getCurrentStackNumbers(state);
   console.log('current stack facts:');
   console.log(currentStackFacts);
+  console.log('current stack numbers');
+  console.log(stackNumbers);
   return {
-    currentStackLength,
-    currentStackFacts
+    maxStackLength,
+    currentStackFacts,
+    stackNumbers
   };
 }
 
