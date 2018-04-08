@@ -28,10 +28,10 @@ export default function reduce(state = initialState, action = {}) {
             maxValue: action.setting.value,
           });
       }
-    // case types.FILTER_CHANGED:
-    //   return state.merge({
-    //     currentFilter: action.filter
-    //   });
+    case types.ADD_NUMBER_FACT_TO_STACK:
+      return state.merge({
+        currentStackFacts: [action.numberFact],
+      });
     default:
       return state;
   }
@@ -41,6 +41,5 @@ export default function reduce(state = initialState, action = {}) {
 
 export function getCurrentNumberSettings(state) {
   console.log('In numbers reducer');
-  console.log(state);
   return state.numbers;
 }

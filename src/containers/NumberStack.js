@@ -16,13 +16,18 @@ class NumberStack extends Component {
     );
   }
 
-  renderStackItem(id, value) {
-    <li
-      className="StackItem"
-      key={id}
-    >
-      {value}
-    </li>
+  renderStackItem(number, fact) {
+    console.log('Stack item:');
+    console.log(fact);
+    return(
+      <li
+        className="StackItem"
+        key={number}
+      >
+        {number}
+        <span>{fact}</span>
+      </li>
+    );
   }
 }
 

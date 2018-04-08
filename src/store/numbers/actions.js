@@ -11,3 +11,12 @@ export function updateNumbersSettings(target, value) {
     }
   );
 }
+
+export function addNumberFactToStack(number, fact) {
+  return(
+    {
+      type: types.ADD_NUMBER_FACT_TO_STACK,
+      numberFact: [number, fact],
+    }
+  );
+}

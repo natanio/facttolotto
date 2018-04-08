@@ -12,6 +12,8 @@ import ListItem from '../components/ListItem';
 import Card from '../components/Card';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
+import * as numbersActions from '../store/numbers/actions';
+import * as numbersSelectors from '../store/numbers/reducer';
 
 class FactScreen extends Component {
 
@@ -32,6 +34,7 @@ class FactScreen extends Component {
         <Card
           leftSide={this.props.currentFact.number}
           rightSide={this.props.currentFact.text}
+          addToStack={this.onAddToStackClick}
         />
 
         <ListInline
@@ -68,6 +71,13 @@ class FactScreen extends Component {
     console.log(`update the fact with ${number} and ${category}`);
   }
 
+  onAddToStackClick() {
+    const { number, text } = this.props.currentFact;
+    console.log(`Stack number is: ${number}, with text: ${text}`);
+    this.props.dispatch(numbersActions.addNumberFactToStack(number, text));
+    console.log(this.props.currentFactStack);
+  }
+
 }
 
 // which props do we want to inject, given the global store state?
@@ -76,10 +86,14 @@ function mapStateToProps(state) {
   console.log('mapping props');
   console.log(state);
   console.log(factsSelectors.getFact(state));
+  console.log('Getting number settings');
+  console.log(numbersSelectors.getCurrentNumberSettings(state));
   const { currentFilter, currentFact } = factsSelectors.getFact(state);
+  const { currentFactStack } = numbersSelectors.getCurrentNumberSettings(state);
   return {
     currentFilter,
-    currentFact
+    currentFact,
+    currentFactStack
   };
 }
 
