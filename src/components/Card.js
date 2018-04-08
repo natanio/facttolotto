@@ -15,6 +15,10 @@ export default class Card extends Component {
         <div className="leftSide">
           <NumberFormat value={this.props.leftSide} displayType={'text'} thousandSeparator={true} />
           <div className="actions-wrapper">
+            <button 
+              onClick={this.nextNumber}>
+              Next number
+            </button>
             <button
               onClick={this.onClick}
             >Use</button>
@@ -31,6 +35,13 @@ export default class Card extends Component {
     if (typeof this.props.addToStack === 'function') {
       console.log('add btn was clicked');
       this.props.addToStack();
+    }
+  }
+
+  nextNumber() {
+    if (typeof this.props.nextNumberClick === 'function') {
+      console.log('next number clicked');
+      this.props.nextNumberClick();
     }
   }
 }

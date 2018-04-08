@@ -18,12 +18,13 @@ export default class StackWrapper extends Component {
     );
   }
 
-  renderItemById(factPair) {
-    console.log('rendering list items');
-    console.log(factPair);
+  renderItemById(value, key) {
+    console.log('rendering stack items');
+    console.log(key);
+    console.log(value);
     if (typeof this.props.renderStackItem === 'function') {
-      let number = factPair[0];
-      let fact = factPair[1];
+      let number = key;
+      let fact = value;
       return this.props.renderStackItem(number, fact);
     }
   }

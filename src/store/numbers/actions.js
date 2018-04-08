@@ -16,7 +16,9 @@ export function addNumberFactToStack(number, fact) {
   return(
     {
       type: types.ADD_NUMBER_FACT_TO_STACK,
-      numberFact: [number, fact],
+      number: number,
+      fact: fact,
+      // numberFact: {[number]: fact},
     }
   );
 }

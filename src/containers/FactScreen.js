@@ -35,6 +35,7 @@ class FactScreen extends Component {
           leftSide={this.props.currentFact.number}
           rightSide={this.props.currentFact.text}
           addToStack={this.onAddToStackClick}
+          nextNumberClick={this.onNextNumberClick}
         />
 
         <ListInline
@@ -75,7 +76,11 @@ class FactScreen extends Component {
     const { number, text } = this.props.currentFact;
     console.log(`Stack number is: ${number}, with text: ${text}`);
     this.props.dispatch(numbersActions.addNumberFactToStack(number, text));
-    console.log(this.props.currentFactStack);
+    this.props.dispatch(factsActions.fetchFact());
+  }
+
+  onNextNumberClick() {
+    this.props.dispatch(factsActions.fetchFact());
   }
 
 }

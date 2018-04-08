@@ -29,9 +29,12 @@ export default function reduce(state = initialState, action = {}) {
           });
       }
     case types.ADD_NUMBER_FACT_TO_STACK:
-      return state.merge({
-        currentStackFacts: [action.numberFact],
-      });
+      return {
+        currentStackFacts: {
+          ...state.currentStackFacts,
+          [action.number]: action.fact
+        }
+      }
     default:
       return state;
   }
