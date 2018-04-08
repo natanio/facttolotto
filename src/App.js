@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as numbersSelectors from './store/numbers/reducer';
 import FactScreen from './containers/FactScreen';
 import NumberLengthSelector from './containers/NumberLengthSelector';
+import NumberStack from './containers/NumberStack';
 import './App.css';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       <div className="App">
         <NumberLengthSelector />
         <FactScreen />
+        <NumberStack />
       </div>
     );
   }

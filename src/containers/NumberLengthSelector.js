@@ -16,6 +16,10 @@ class NumberLengthSelector extends Component {
     console.log(`new number length: ${event}`)
     console.log(event.target.data_target);
     let { id, value } = event.target;
+    if (value < 1) {
+      alert("Can't be less than 1.");
+      return false;
+    }
     this.props.dispatch(numbersActions.updateNumbersSettings(id, value));
   }
 
