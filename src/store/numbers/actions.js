@@ -1,5 +1,4 @@
 import * as types from './actionTypes';
-import * as numbersSelectors from '../numbers/reducer';
 
 export function updateNumbersSettings(target, value) {
   return(
@@ -18,6 +17,15 @@ export function addNumberFactToStack(number, fact) {
       type: types.ADD_NUMBER_FACT_TO_STACK,
       number: number,
       fact: fact,
+    }
+  );
+}
+
+export function generateRandomNumberFromState() {
+  return (
+    {
+      type: types.GENERATE_NUMBER,
+      payload: true
     }
   );
 }

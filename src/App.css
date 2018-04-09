@@ -33,6 +33,8 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.FactScreen.hidden { display: none; }
+
 .btn-group {
   list-style: none;
   text-align: right;

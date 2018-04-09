@@ -11,6 +11,7 @@ const initialState = Immutable({
   currentStackFacts: {},
   remainingStackLength: 5,
   stackNumbers: [],
+  generatedNumber: 0,
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -38,10 +39,19 @@ export default function reduce(state = initialState, action = {}) {
             maxStackValue: action.setting.value,
           });
       }
+    case types.GENERATE_NUMBER:
+      const generatedNumber = numberService.generateNumber(state);
+      return state.merge({
+        generatedNumber: generatedNumber
+      })
     case types.ADD_NUMBER_FACT_TO_STACK:
       // Process the number to be added to the stack fitting the
       // user's requirements
       const stackNumbers = Immutable(state.stackNumbers).concat(numberService.formatStackNumber(state, action.number));
+      console.log(`remaining stack: ${state.remainingStackLength}`);
+      console.log(`stack length: ${stackNumbers.length}`);
+      console.log(`state stack length: ${state.stackNumbers.length}`);
+      const calculatedRemainingStack = state.remainingStackLength - stackNumbers.length + state.stackNumbers.length;
       console.log('returned stack numbers');
       console.log(stackNumbers);
       const currentStackFacts = Immutable({
@@ -49,8 +59,8 @@ export default function reduce(state = initialState, action = {}) {
           ...state.currentStackFacts,
         [action.number]: action.fact
         },
-        stackNumbers: stackNumbers
-        
+        stackNumbers: stackNumbers,
+        remainingStackLength: calculatedRemainingStack < 0 ? 0 : calculatedRemainingStack,
       });
       return state.merge(currentStackFacts);
     default:
@@ -65,94 +75,11 @@ export function getCurrentNumberSettings(state) {
   return state.numbers;
 }
 
-export function getCurrentStackNumbers(state) {
-  console.log('inside number formatter');
-  // determine what number of digits are allowed
-  // based on the user input. 1-70 would allow 1 and two digit numbers up to 70.
-  // But 10-70 would only allow two digit numbers up to 70
-  const { maxStackLength, minStackValue, maxStackValue, currentStackFacts } = state.numbers;
-  const allowedDigitLength = () => {
-    let minLength = minStackValue.toString().length;
-    let maxLength = maxStackValue.toString().length;
-    console.log(`min length: ${minLength}`);
-    console.log(`max length: ${maxLength}`);
-
-    if (minLength < maxLength) {
-      return parseInt(maxLength);
-    }
-    return parseInt(minLength);
-  };
-
-  // Placeholder for numbers
-  let numbers = [];
-  let subtract = new ArraySubtract((a, b) => { return a === b });
-  let formattedNumbers = [];
-  let leftoverNumbers = [];
-
-  console.log(currentStackFacts);
-  _.map(_.keys(currentStackFacts), (number) => {
-    console.log('key in current stack numbers');
-    console.log(number);
-    numbers.push(number.toString());
-  });
-
-  _.map(numbers, (number) => {
-    // formatNumber(number);
-    console.log(`Number in formatter: ${number}`);
-    let splitNumber = number.split('');
-    console.log(splitNumber);
-    // Remove from the split number array. Add left over to next remaining numbers.
-    let numbersToCombine = splitNumber.slice(0, allowedDigitLength());
-    let combinedNumber = numbersToCombine.join('');
-    // let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
-    let usedNumbers = splitNumber.splice(0,numbersToCombine.length); // to track used numbers
-    let unusedNumbers = splitNumber; // for easy reading
-    console.log(`unused numbers:`);
-    console.log(unusedNumbers);
-    formattedNumbers.push(combinedNumber);
-
-    do {
-      if (unusedNumbers.length > allowedDigitLength) {
-        console.log('going to format unused numbers top');
-        numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
-        combinedNumber = numbersToCombine.join('');
-        usedNumbers = numbersToCombine.splice(0,numbersToCombine.length); // to track used numbers
-        unusedNumbers = numbersToCombine;
-        formattedNumbers.push(combinedNumber);
-      } else if (unusedNumbers.length > 0) {
-        console.log('going to format unused numbers bottom');
-        numbersToCombine = unusedNumbers.join('');
-        formattedNumbers.push(numbersToCombine);
-        unusedNumbers = []; // clear the array
-      } else {
-        unusedNumbers = []; // clear the array
-      }
-    }
-    while (unusedNumbers.length > 0);
-  });
-
-  // function formatNumber(number) {
-  //   console.log('formatting number');
-  //   let splitNumber = number.split('');
-  //   // Remove from the split number array. Add left over to next remaining numbers.
-  //   let numbersToCombine = splitNumber.slice(0, allowedDigitLength);
-  //   let combinedNumber = numbersToCombine.join('');
-  //   let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
-  //   formattedNumbers.push(combinedNumber);
-
-  //   do {
-  //     if (unusedNumbers.length > allowedDigitLength) {
-  //       numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
-  //       combinedNumber = numbersToCombine.join('');
-  //       formattedNumbers.push(combinedNumber);
-  //       unusedNumbers = subtract.sub(unusedNumbers, numbersToCombine);
-  //     } else {
-  //       numbersToCombine = splitNumber;
-  //       formattedNumbers.push(combinedNumber);
-  //     }
-  //   }
-  //   while (unusedNumbers.length > 0);
-  // }
-  console.log(formattedNumbers);
-  return formattedNumbers;
-}
+// export function generateNumber(state) {
+//   console.log('Generating number...');
+//   const generatedNumber = numberService.generateNumber(state);
+//   console.log(generatedNumber);
+//   return state.merge({
+//     generatedNumber: generatedNumber
+//   });
+// }

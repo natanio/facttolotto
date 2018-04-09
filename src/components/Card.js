@@ -13,7 +13,8 @@ export default class Card extends Component {
     return (
       <div className="card">
         <div className="leftSide">
-          <NumberFormat value={this.props.leftSide} displayType={'text'} thousandSeparator={true} />
+          {this.props.leftSide}
+          {/* <NumberFormat value={this.props.leftSide} displayType={'text'} thousandSeparator={true} /> */}
           <div className="actions-wrapper">
             <button 
               onClick={this.nextNumber}>

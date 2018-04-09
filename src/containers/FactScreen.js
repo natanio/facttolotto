@@ -24,14 +24,20 @@ class FactScreen extends Component {
 
   componentDidMount() {
     console.log('mounted');
-    this.props.dispatch(factsActions.fetchFact());
+    this.props.dispatch(numbersActions.generateRandomNumberFromState());
     console.log(this.state);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.generatedNumber!==this.props.generatedNumber){
+      this.props.dispatch(factsActions.fetchFact(nextProps.generatedNumber));
+    }
   }
 
   render() {
     if (!this.props.currentFact) return this.renderLoading();
     return (
-      <div className="FactScreen">
+      <div className={`FactScreen ${this.props.numberIsFilled ? 'hidden' : ''}`}>
         <Card
           leftSide={this.props.currentFact.number}
           rightSide={this.props.currentFact.text}
@@ -77,11 +83,13 @@ class FactScreen extends Component {
     const { number, text } = this.props.currentFact;
     console.log(`Stack number is: ${number}, with text: ${text}`);
     this.props.dispatch(numbersActions.addNumberFactToStack(number, text));
-    this.props.dispatch(factsActions.fetchFact());
+    // this.props.dispatch(factsActions.fetchFact());
+    this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
 
   onNextNumberClick() {
-    this.props.dispatch(factsActions.fetchFact());
+    // this.props.dispatch(factsActions.fetchFact());
+    this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
 
 }
@@ -95,11 +103,13 @@ function mapStateToProps(state) {
   console.log('Getting number settings');
   console.log(numbersSelectors.getCurrentNumberSettings(state));
   const { currentFilter, currentFact } = factsSelectors.getFact(state);
-  const { currentFactStack } = numbersSelectors.getCurrentNumberSettings(state);
+  const { currentFactStack, generatedNumber, remainingStackLength } = numbersSelectors.getCurrentNumberSettings(state);
   return {
     currentFilter,
     currentFact,
-    currentFactStack
+    currentFactStack,
+    generatedNumber,
+    numberIsFilled: remainingStackLength == 0
   };
 }
 

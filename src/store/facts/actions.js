@@ -24,9 +24,6 @@ import * as numbersSelectors from '../numbers/reducer';
 // }
 
 export function fetchFact(number, category = 'date') {
-  if (!number) {
-    number = Math.floor(Math.random() * 20000);
-  }
   console.log('fetching the fact');
   return async(dispatch) => {
     try {
@@ -39,10 +36,6 @@ export function fetchFact(number, category = 'date') {
       console.error(error);
     }
   };
-}
-
-export function generateNumber(state) {
-  const { maxStackLength } = numbersSelectors.getCurrentNumberSettings(state);
 }
 
 // export function changeFilter(newFilter) {
