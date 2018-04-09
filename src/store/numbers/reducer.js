@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 import _ from 'lodash';
 import ArraySubtract from 'array-subtract';
+import numberService from '../../services/numbers';
 
 const initialState = Immutable({
   maxStackLength: 5,
@@ -9,6 +10,7 @@ const initialState = Immutable({
   maxStackValue: 70,
   currentStackFacts: {},
   remainingStackLength: 5,
+  stackNumbers: [],
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -37,11 +39,18 @@ export default function reduce(state = initialState, action = {}) {
           });
       }
     case types.ADD_NUMBER_FACT_TO_STACK:
+      // Process the number to be added to the stack fitting the
+      // user's requirements
+      const stackNumbers = Immutable(state.stackNumbers).concat(numberService.formatStackNumber(state, action.number));
+      console.log('returned stack numbers');
+      console.log(stackNumbers);
       const currentStackFacts = Immutable({
         currentStackFacts: {
           ...state.currentStackFacts,
         [action.number]: action.fact
-        }
+        },
+        stackNumbers: stackNumbers
+        
       });
       return state.merge(currentStackFacts);
     default:

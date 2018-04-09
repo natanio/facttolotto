@@ -25,6 +25,7 @@ class FactScreen extends Component {
   componentDidMount() {
     console.log('mounted');
     this.props.dispatch(factsActions.fetchFact());
+    console.log(this.state);
   }
 
   render() {

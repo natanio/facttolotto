@@ -9,6 +9,7 @@ import _ from 'lodash';
 import * as types from './actionTypes';
 import numberService from '../../services/numbers';
 import * as factsSelectors from '../facts/reducer';
+import * as numbersSelectors from '../numbers/reducer';
 
 // export function fetchRandomFact() {
 //   try {
@@ -38,6 +39,10 @@ export function fetchFact(number, category = 'date') {
       console.error(error);
     }
   };
+}
+
+export function generateNumber(state) {
+  const { maxStackLength } = numbersSelectors.getCurrentNumberSettings(state);
 }
 
 // export function changeFilter(newFilter) {

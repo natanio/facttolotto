@@ -47,8 +47,8 @@ class NumberStack extends Component {
 }
 
 function mapStateToProps(state) {
-  const { maxStackLength, currentStackFacts } = numbersSelectors.getCurrentNumberSettings(state);
-  const stackNumbers = numbersSelectors.getCurrentStackNumbers(state);
+  const { maxStackLength, currentStackFacts, stackNumbers } = numbersSelectors.getCurrentNumberSettings(state);
+  // const stackNumbers = numbersSelectors.getCurrentStackNumbers(state);
   console.log('current stack facts:');
   console.log(currentStackFacts);
   console.log('current stack numbers');
