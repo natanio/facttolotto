@@ -29,6 +29,7 @@ export default function reduce(state = initialState, action = {}) {
             maxStackLength: action.setting.value,
             currentStackFacts: {},
             remainingStackLength: action.setting.value,
+            stackNumbers: [],
           });
         case 'minStackValue':
           return state.merge({

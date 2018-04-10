@@ -30,7 +30,7 @@ class FactScreen extends Component {
 
   componentWillReceiveProps(nextProps){
     if (nextProps.generatedNumber!==this.props.generatedNumber){
-      this.props.dispatch(factsActions.fetchFact(nextProps.generatedNumber));
+      this.props.dispatch(factsActions.fetchFact(nextProps.generatedNumber, nextProps.currentFilter));
     }
   }
 
@@ -46,7 +46,7 @@ class FactScreen extends Component {
         />
 
         <ListInline
-          items={['date', 'trivia', 'year', 'math']}
+          items={['trivia', 'year', 'math', 'date']}
           renderItem={this.renderItem}
         />
 

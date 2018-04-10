@@ -71,17 +71,7 @@ class NumberService {
     // based on the user input. 1-70 would allow 1 and two digit numbers up to 70.
     // But 10-70 would only allow two digit numbers up to 70
     const { maxStackLength, minStackValue, maxStackValue } = state;
-    const allowedDigitLength = () => {
-      let minLength = minStackValue.toString().length;
-      let maxLength = maxStackValue.toString().length;
-      console.log(`min length: ${minLength}`);
-      console.log(`max length: ${maxLength}`);
-  
-      if (minLength < maxLength) {
-        return parseInt(maxLength);
-      }
-      return parseInt(minLength);
-    };
+    const allowedDigitLength = this.allowedDigitLength(minStackValue, maxStackValue);
   
     // Placeholder for numbers
     let numbers = [];
@@ -93,12 +83,12 @@ class NumberService {
     let splitNumber = number.toString().split('');
     console.log(splitNumber);
     // Remove from the split number array. Add left over to next remaining numbers.
-    let numbersToCombine = splitNumber.slice(0, allowedDigitLength());
+    let numbersToCombine = splitNumber.slice(0, allowedDigitLength);
     let combinedNumber = numbersToCombine.join('');
     // let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
     let usedNumbers = splitNumber.splice(0,numbersToCombine.length); // to track used numbers
     let unusedNumbers = splitNumber; // for easy reading
-    console.log(`unused numbers:`);
+    console.log(`unused numbers: ${unusedNumbers.length} of ${allowedDigitLength}`);
     console.log(unusedNumbers);
     formattedNumbers.push(combinedNumber);
 
@@ -107,8 +97,11 @@ class NumberService {
         console.log('going to format unused numbers top');
         numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
         combinedNumber = numbersToCombine.join('');
-        usedNumbers = numbersToCombine.splice(0,numbersToCombine.length); // to track used numbers
+        usedNumbers = unusedNumbers.splice(0,allowedDigitLength); // to track used numbers
         unusedNumbers = numbersToCombine;
+        console.log('Working on unused numbers');
+        console.log('remaining unused');
+        console.log(unusedNumbers);
         formattedNumbers.push(combinedNumber);
       } else if (unusedNumbers.length > 0) {
         console.log('going to format unused numbers bottom');

@@ -23,7 +23,7 @@ import * as numbersSelectors from '../numbers/reducer';
 //   }
 // }
 
-export function fetchFact(number, category = 'date') {
+export function fetchFact(number, category = 'trivia') {
   console.log('fetching the fact');
   return async(dispatch) => {
     try {
