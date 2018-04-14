@@ -95,13 +95,14 @@ class NumberService {
     do {
       if (unusedNumbers.length > allowedDigitLength) {
         console.log('going to format unused numbers top');
-        numbersToCombine = unusedNumbers.slice(0, allowedDigitLength);
+        numbersToCombine = unusedNumbers.splice(0, allowedDigitLength);
         combinedNumber = numbersToCombine.join('');
-        usedNumbers = unusedNumbers.splice(0,allowedDigitLength); // to track used numbers
-        unusedNumbers = numbersToCombine;
+        usedNumbers = numbersToCombine; // to track used numbers
+        // unusedNumbers = numbersToCombine;
         console.log('Working on unused numbers');
         console.log('remaining unused');
         console.log(unusedNumbers);
+        console.log(usedNumbers);
         formattedNumbers.push(combinedNumber);
       } else if (unusedNumbers.length > 0) {
         console.log('going to format unused numbers bottom');
