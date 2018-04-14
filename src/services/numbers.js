@@ -64,7 +64,7 @@ class NumberService {
     return parseInt(minLength);
   };
 
-  formatStackNumber(state, number) {
+  formatStackNumber(state, number, onlyInMinMaxRange = false) {
     console.log('inside number format function');
     console.log(state);
     // determine what number of digits are allowed
@@ -90,7 +90,13 @@ class NumberService {
     let unusedNumbers = splitNumber; // for easy reading
     console.log(`unused numbers: ${unusedNumbers.length} of ${allowedDigitLength}`);
     console.log(unusedNumbers);
-    formattedNumbers.push(combinedNumber);
+    if (onlyInMinMaxRange) {
+      if (
+        parseInt(combinedNumber) >= minStackValue &&
+        parseInt(combinedNumber) <= maxStackValue
+      ) formattedNumbers.push(combinedNumber);
+    }
+    else formattedNumbers.push(combinedNumber);
 
     do {
       if (unusedNumbers.length > allowedDigitLength) {
@@ -103,11 +109,24 @@ class NumberService {
         console.log('remaining unused');
         console.log(unusedNumbers);
         console.log(usedNumbers);
-        formattedNumbers.push(combinedNumber);
+        if (onlyInMinMaxRange) {
+          if (
+            parseInt(combinedNumber) >= minStackValue &&
+            parseInt(combinedNumber) <= maxStackValue
+          ) formattedNumbers.push(combinedNumber);
+        }
+        else formattedNumbers.push(combinedNumber);
       } else if (unusedNumbers.length > 0) {
         console.log('going to format unused numbers bottom');
-        numbersToCombine = unusedNumbers.join('');
-        formattedNumbers.push(numbersToCombine);
+        console.log(unusedNumbers);
+        combinedNumber = unusedNumbers.join('');
+        if (onlyInMinMaxRange) {
+          if (
+            parseInt(combinedNumber) >= minStackValue &&
+            parseInt(combinedNumber) <= maxStackValue
+          ) formattedNumbers.push(combinedNumber);
+        }
+        else formattedNumbers.push(combinedNumber);
         unusedNumbers = []; // clear the array
       } else {
         unusedNumbers = []; // clear the array

@@ -25,7 +25,8 @@ class FactScreen extends Component {
   componentDidMount() {
     console.log('mounted');
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
-    console.log(this.state);
+    console.log('mounted props');
+    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps){
