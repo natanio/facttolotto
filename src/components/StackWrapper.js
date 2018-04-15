@@ -8,16 +8,21 @@ export default class StackWrapper extends Component {
     autoBind(this);
   }
 
+  componentWillReceiveProps() {
+    console.log('fact stack come on');
+    console.log(this.props.currentStackFacts);
+  }
+
   render() {
     console.log('Props in StackWrapper');
-    console.log(this.props);
+    console.log(this.props.currentStackFacts);
     return (
       <div className="StackWrapper">
-        <h2>Your selected numbers</h2>
+        <h2>Your lotto numbers <small>(filled after you click 'use')</small></h2>
         <ul className="StackNumbers">
           {_.times(this.props.maxStackLength, this.renderNumberContainer)}
         </ul>
-        <h3>About your numbers</h3>
+        <h3>Facts from your numbers</h3>
         <ul className="StackFacts">
           {_.map(this.props.currentStackFacts, this.renderItemById)}
         </ul>

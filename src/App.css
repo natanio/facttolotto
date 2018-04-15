@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Fredoka+One|Open+Sans');
+
 html {
   height: 100%;
 }
@@ -6,31 +8,111 @@ body {
   font-size: 100%;
   height: 100%;
   background: #f6f6f6;
+  font-family: 'Open Sans', 'helvetica', 'arial', sans-serif;
+  color: #011627;
+  line-height: 1.1;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h2 > small {
+  font-size: 12px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.container {
+  max-width: 1140px;
+  margin: 1.5em auto;
+  display: flex;
+  justify-content: space-between;
 }
 
-.App-title {
-  font-size: 1.5em;
+.left {
+  flex: 1;
+  min-width: 150px;
+  max-width: 150px;
+  padding: 0 15px;
 }
 
-.App-intro {
-  font-size: large;
+.center {
+  flex: 4;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.right {
+  flex: 1;
+  min-width: 190px;
+  max-width: 190px;
+  padding: 0 15px;
+}
+
+.logo {
+  font-family: 'Fredoka One', cursive;
+  height: 90px;
+  width: 90px;
+  margin: 0 auto;
+  background: #FDFFFC;
+  border: 4px solid #FF9F1C;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+}
+
+.desc {
+  text-align: center;
+  margin: 1em 0 1.5em;
+  font-size: 14px;
+}
+
+/* FORM */
+.NumberSettingsWrap {
+  padding: 1em;
+  background: #FDFFFC;
+  box-shadow: 1px 2px 0 3px #41EAD4;
+  border-radius: 8px;
+  display: flex;
+}
+
+.NumberSettingsWrap .formGroup:first-child {
+  width: 33.33%;
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.NumberSettingsWrap .formGroup {
+  text-align: center;
+}
+
+.NumberSettingsWrap input {
+  height: 30px;
+  font-size: 24px;
+  width: 100%;
+  display: inline-block;
+  max-width: 150px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.2);
+  text-align: center;
+  font-family: 'Abril Fatface', cursive;
+}
+
+.NumberSettingsWrap .formGroup:last-child {
+  width: 66.66%;
+  text-align: center;
+}
+
+.NumberSettingsWrap .formGroup p, .NumberSettingsWrap .formGroup label {
+  font-size: 14px;
+  margin: 0 0 1em;
+  display: block;
+}
+
+.formInline {
+  display: flex;
+}
+
+.formInline > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
 }
 
 .FactScreen.hidden { display: none; }
@@ -40,8 +122,8 @@ body {
   text-align: right;
   margin: 0 auto;
   padding: 0;
-  width: 66.66%;
-  max-width: 750px;
+  width: 100%;
+  max-width: 728px;
 }
 
 .btn-group li {
@@ -58,16 +140,18 @@ body {
 }
 
 .btn-group li.selected {
-  border-bottom: 3px solid rgba(0,0,0,0.7);
+  border-bottom: 3px solid #FF9F1C;
 }
 
 ul.StackNumbers {
   display: flex;
   list-style: none;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 2em auto;
   padding: 0;
-  width: 66.66%;
+  width: 100%;
+  max-width: 728px;
+  font-family: 'Abril Fatface', cursive;
 }
 
 ul.StackNumbers li {
@@ -84,6 +168,25 @@ ul.StackNumbers li {
 }
 
 .StackNumbers li.filled {
-  border-color: #1da1ff;
+  border-color: #FF9F1C;
   color: #525252;
+}
+
+ul.StackFacts {
+  margin: 0;
+  padding: 0;
+}
+
+li.StackItem {
+  font-size: 18px;
+  list-style: none;
+  background: #FDFFFC;
+  box-shadow: 0 2px 4px 0 rgba(167,167,167,0.50);
+  border-radius: 4px;
+  padding: 1.25em 1em;
+  margin: 0 0 1em
+}
+
+li.StackItem span {
+  margin-left: 2em;
 }

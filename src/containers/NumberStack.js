@@ -39,7 +39,7 @@ class NumberStack extends Component {
         className="StackItem"
         key={number}
       >
-        {number}
+        {number}:
         <span>{fact}</span>
       </li>
     );

@@ -10,10 +10,28 @@ class App extends Component {
   render() {
     console.log(this.props.currentNumber);
     return (
-      <div className="App">
-        <NumberLengthSelector />
-        <FactScreen />
-        <NumberStack />
+      <div className="container">
+        <div className="left">
+          <div className="logoWrap">
+            <div className="logo">
+              Factto
+              <br />
+              Lotto
+            </div>
+            <div className="desc">
+              Get lotto numbers while learning something
+            </div>
+          </div>
+        </div>
+
+        <div className="center">
+          <NumberLengthSelector />
+          <FactScreen />
+          <NumberStack />
+        </div>
+
+        <div className="right">
+        </div>
       </div>
     );
   }

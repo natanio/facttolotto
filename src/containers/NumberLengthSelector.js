@@ -29,7 +29,7 @@ class NumberLengthSelector extends Component {
     return (
       <div className="NumberSettingsWrap">
         <div className="formGroup">
-          <label htmlFor="numberlength">How many numbers do you need to choose?</label>
+          <label htmlFor="numberlength">How many numbers do you need?</label>
           <input 
             type="number" 
             placeholder="5"
@@ -38,19 +38,25 @@ class NumberLengthSelector extends Component {
             onChange={this.updateNumberSettings} />
         </div>
         <div className="formGroup">
-          <p>For each number, what is the minimum and maximum (e.g. 1 - 70)?</p>
-          <label htmlFor="numberMin">Minimum value</label>
-          <input 
-            type="number"
-            id="minStackValue" 
-            value={minStackValue}
-            onChange={this.updateNumberSettings}/>
-          <label htmlFor="numberMax">Maximum value</label>
-          <input 
-            type="number" 
-            id="maxStackValue"
-            value={maxStackValue}
-            onChange={this.updateNumberSettings}/>
+          <p>Each number’s minimum and maximum value</p>
+          <div className="formInline">
+            <div>
+              <input 
+                type="number"
+                id="minStackValue" 
+                value={minStackValue}
+                onChange={this.updateNumberSettings}/>
+              <label htmlFor="numberMin">min</label>
+            </div>
+            <div>
+              <input 
+                type="number" 
+                id="maxStackValue"
+                value={maxStackValue}
+                onChange={this.updateNumberSettings}/>
+              <label htmlFor="numberMax">max</label>
+            </div>
+          </div>
         </div>
       </div>
     )

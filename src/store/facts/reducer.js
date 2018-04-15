@@ -7,6 +7,7 @@
 import _ from 'lodash';
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
+import numberService from '../../services/numbers';
 
 const initialState = Immutable({
   currentFilter: undefined,
