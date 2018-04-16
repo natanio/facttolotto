@@ -18,7 +18,7 @@ export default class Card extends Component {
           <div className="actions-wrapper">
             <button 
               onClick={this.nextNumber}>
-              Next number
+              Skip
             </button>
             <button
               onClick={this.onClick}

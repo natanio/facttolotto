@@ -156,13 +156,13 @@ ul.StackNumbers {
 
 ul.StackNumbers li {
   background: white;
-  min-width: 80px;
+  width: 80px;
+  height: 80px;
   margin: 0 5px;
   text-align: center;
-  height: 100px;
-  line-height: 100px;
+  line-height: 80px;
   font-size: 22px;
-  border-radius: 6px;
+  border-radius: 50%;
   border: 3px solid rgba(0,0,0,0.1);
   color: #bfbfbf;
 }
@@ -170,6 +170,7 @@ ul.StackNumbers li {
 .StackNumbers li.filled {
   border-color: #FF9F1C;
   color: #525252;
+  box-shadow: 0 3px 17px rgba(0,0,0,0.2);
 }
 
 ul.StackFacts {
@@ -178,15 +179,21 @@ ul.StackFacts {
 }
 
 li.StackItem {
+  display: flex;
+  align-items: center;
   font-size: 18px;
   list-style: none;
   background: #FDFFFC;
   box-shadow: 0 2px 4px 0 rgba(167,167,167,0.50);
   border-radius: 4px;
   padding: 1.25em 1em;
-  margin: 0 0 1em
+  margin: 0 0 1em;
+  font-weight: bold;
 }
 
 li.StackItem span {
   margin-left: 2em;
+  display: inline-block;
+  color: rgba(0,0,0,0.8);
+  font-weight: 400;
 }
