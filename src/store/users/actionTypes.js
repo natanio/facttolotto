@@ -1,0 +1,1 @@
+export const INPUT_EMAIL_CHANGED = 'users.INPUT_EMAIL_CHANGED';

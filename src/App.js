@@ -19,7 +19,7 @@ class App extends Component {
               Lotto
             </div>
             <div className="desc">
-              Get lotto numbers while learning something
+              Get lotto numbers, learn something new
             </div>
           </div>
         </div>

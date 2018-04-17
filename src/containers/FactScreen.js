@@ -14,6 +14,17 @@ import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
 import * as numbersActions from '../store/numbers/actions';
 import * as numbersSelectors from '../store/numbers/reducer';
+import * as usersActions from '../store/users/actions';
+import * as userSelectors from '../store/users/reducer';
+import { fadeInUp } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+  fadeInUp: {
+    animation: 'fadeInUp 1s',
+    animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+  }
+};
 
 class FactScreen extends Component {
 
@@ -38,20 +49,41 @@ class FactScreen extends Component {
   render() {
     if (!this.props.currentFact) return this.renderLoading();
     return (
-      <div className={`FactScreen ${this.props.numberIsFilled ? 'hidden' : ''}`}>
-        <Card
-          leftSide={this.props.currentFact.number}
-          rightSide={this.props.currentFact.text}
-          addToStack={this.onAddToStackClick}
-          nextNumberClick={this.onNextNumberClick}
-        />
+      <StyleRoot>
 
-        <ListInline
-          items={['trivia', 'year', 'math', 'date']}
-          renderItem={this.renderItem}
-        />
+        <div style={styles.fadeInUp} className={`NumberFilledWrap ${this.props.numberIsFilled ? '' : 'hidden' }`}>
+          <h2>Your numbers are ready!</h2>
+          <p>
+            Would you like us to email your numbers and facts?
+          </p>
+          <div className="inlineFormGroup">
+            <input type="text" placeholder="john@mail.com" />
+            <button 
+              className="emailBtn" 
+              onChange={this.onHandleEmailChange} 
+              value={this.props.user_email}>
+                Send
+            </button>
+          </div>
+        </div>
 
-      </div>
+        <div style={styles.fadeInUp} className={`FactScreen ${this.props.numberIsFilled ? 'hidden' : ''}`}>
+          
+          <Card
+            leftSide={this.props.currentFact.number}
+            rightSide={this.props.currentFact.text}
+            addToStack={this.onAddToStackClick}
+            nextNumberClick={this.onNextNumberClick}
+          />
+
+          <ListInline
+            items={['trivia', 'year', 'math', 'date']}
+            renderItem={this.renderItem}
+          />
+
+        </div>
+
+      </StyleRoot>
     );
   }
 
@@ -93,6 +125,13 @@ class FactScreen extends Component {
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
 
+  onHandleEmailChange(event) {
+    console.log(`user email is: ${event}`)
+    console.log(event.target.data_target);
+    let { value } = event.target;
+    this.props.dispatch(usersActions.updateInputEmail(value));
+  }
+
 }
 
 // which props do we want to inject, given the global store state?
@@ -110,7 +149,8 @@ function mapStateToProps(state) {
     currentFact,
     currentFactStack,
     generatedNumber,
-    numberIsFilled: remainingStackLength == 0
+    numberIsFilled: remainingStackLength == 0,
+    user_email: userSelectors.getUserEmail(state)
   };
 }
 

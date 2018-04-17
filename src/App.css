@@ -115,7 +115,7 @@ h2 > small {
   width: 50%;
 }
 
-.FactScreen.hidden { display: none; }
+.hidden { display: none !important; }
 
 .btn-group {
   list-style: none;
@@ -196,4 +196,14 @@ li.StackItem span {
   display: inline-block;
   color: rgba(0,0,0,0.8);
   font-weight: 400;
+}
+
+/* USER EMAIL INPUT */
+.NumberFilledWrap {
+  margin: 50px 0;
+}
+
+.NumberFilledWrap h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 28px;
 }
