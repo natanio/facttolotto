@@ -207,3 +207,41 @@ li.StackItem span {
   font-family: 'Fredoka One', cursive;
   font-size: 28px;
 }
+
+.inlineFormGroup input {
+  width: 90%;
+  max-width: 350px;
+  font-size: 20px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 25px;
+  padding: 12px 20px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.inlineFormGroup {
+  width: 100%;
+}
+
+button.emailBtn {
+  height: 49px;
+  vertical-align: top;
+  display: inline-block;
+  border: 1px solid #39ceba;
+  border-left: none;
+  background: #41ead4;
+  color: white;
+  border-radius: 25px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  width: 10%;
+  min-width: 60px;
+  font-size: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+button.emailBtn:hover {
+  background: #39ceba;
+}
