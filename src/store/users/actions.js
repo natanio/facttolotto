@@ -8,3 +8,12 @@ export function updateInputEmail(email) {
     }
   );
 }
+
+export function updateTouchedState(field) {
+  return (
+    {
+      type: types.TOUCHED_STATE_UPDATED,
+      field: field,
+    }
+  )
+}

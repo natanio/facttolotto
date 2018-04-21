@@ -63,6 +63,69 @@ h2 > small {
   font-size: 14px;
 }
 
+/* THEME */
+button, a {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.btn {
+  background: #ff9f1c;
+  color: white;
+  padding: 12px 22px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  border: 1px solid transparent;
+}
+
+.btn:hover {
+  background: #ffb348;
+}
+
+.btn:active, .btn:focus {
+  outline: none;
+  border: 1px solid #ffdc5c;
+  box-shadow: 0 0 0 2px #ffa50057;
+  background: #ff9f1c;
+}
+
+button.emailBtn {
+  height: 49px;
+  padding: unset;
+  vertical-align: top;
+  display: inline-block;
+  border: 1px solid #39ceba;
+  border-left: none;
+  background: #41ead4;
+  color: white;
+  border-radius: 25px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  width: 10%;
+  min-width: 60px;
+  font-size: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+button.btn.emailBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.emailBtn:hover {
+  background: #39ceba;
+}
+
+.emailBtn:active, .emailBtn:focus {
+  outline: none;
+  border: 1px solid #73f4e2;
+  box-shadow: 0 0 0 2px #2ac4b0;
+  background: #41ead4;
+}
+
 /* FORM */
 .NumberSettingsWrap {
   padding: 1em;
@@ -219,29 +282,29 @@ li.StackItem span {
   border-bottom-right-radius: 0px;
 }
 
+.inlineFormGroup input:focus {
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.inlineFormGroup input.error {
+  border-color: #ff9494;
+}
+
+.inlineFormGroup input.error ~ .errorMsg {
+  display: block;
+}
+
 .inlineFormGroup {
   width: 100%;
 }
 
-button.emailBtn {
-  height: 49px;
-  vertical-align: top;
-  display: inline-block;
-  border: 1px solid #39ceba;
-  border-left: none;
-  background: #41ead4;
-  color: white;
-  border-radius: 25px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  width: 10%;
-  min-width: 60px;
-  font-size: 16px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: all 0.3s ease-in;
+.errorMsg {
+  display: none;
+  color: #ff9494;
+  margin: 8px 0;
 }
 
-button.emailBtn:hover {
-  background: #39ceba;
+.startOver {
+  margin: 24px 0;
 }

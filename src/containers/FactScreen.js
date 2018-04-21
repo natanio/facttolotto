@@ -10,6 +10,7 @@ import './FactScreen.css';
 import ListInline from '../components/ListInline';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
+import EmailForm from '../containers/EmailForm';
 import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
 import * as numbersActions from '../store/numbers/actions';
@@ -56,13 +57,15 @@ class FactScreen extends Component {
           <p>
             Would you like us to email your numbers and facts?
           </p>
-          <div className="inlineFormGroup">
-            <input type="text" placeholder="john@mail.com" />
-            <button 
-              className="emailBtn" 
-              onChange={this.onHandleEmailChange} 
-              value={this.props.user_email}>
-                Send
+          
+          <EmailForm />
+
+          <div className="startOver">
+            <button
+              className="btn"
+              onClick={this.onHandleStartOver}
+            >
+              New number
             </button>
           </div>
         </div>
@@ -125,11 +128,8 @@ class FactScreen extends Component {
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
 
-  onHandleEmailChange(event) {
-    console.log(`user email is: ${event}`)
-    console.log(event.target.data_target);
-    let { value } = event.target;
-    this.props.dispatch(usersActions.updateInputEmail(value));
+  onHandleStartOver(event) {
+    console.log('start over!');
   }
 
 }
@@ -149,8 +149,7 @@ function mapStateToProps(state) {
     currentFact,
     currentFactStack,
     generatedNumber,
-    numberIsFilled: remainingStackLength == 0,
-    user_email: userSelectors.getUserEmail(state)
+    numberIsFilled: remainingStackLength == 0
   };
 }
 
