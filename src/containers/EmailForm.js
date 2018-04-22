@@ -31,7 +31,10 @@ class EmailForm extends Component {
           onChange={this.onHandleEmailChange} 
           value={this.props.user_email ? this.props.user_email : ''}
           />
-        <button className="btn emailBtn" disabled={!isEnabled}>
+        <button 
+          className="btn emailBtn"
+          onClick={this.onSendClick}
+          disabled={!isEnabled}>
           Send
         </button>
         <div className="errorMsg">Please enter a valid email.</div>
@@ -50,6 +53,21 @@ class EmailForm extends Component {
     this.props.dispatch(usersActions.updateTouchedState(field))
     console.log('after blur');
     console.log(this.props);
+  }
+
+  onSendClick() {
+    let {user_email} = this.props;
+    let dbCon = this.props.db.database().ref();    
+
+    dbCon.child("users").orderByChild("email").equalTo(user_email).once("value",snapshot => {
+      const userData = snapshot.val();
+      if (userData){
+        return;
+      }
+      dbCon.child('users').push({
+        email: user_email,
+      });
+    });
   }
 }
 

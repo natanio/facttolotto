@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 import * as numbersSelectors from './store/numbers/reducer';
 import FactScreen from './containers/FactScreen';
 import NumberLengthSelector from './containers/NumberLengthSelector';
@@ -7,6 +8,21 @@ import NumberStack from './containers/NumberStack';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAB16E2an2dnvBjuItirPhV4dFJwnGRbgA",
+      authDomain: "facttolotto.firebaseapp.com",
+      databaseURL: "https://facttolotto.firebaseio.com",
+      projectId: "facttolotto",
+      storageBucket: "facttolotto.appspot.com",
+      messagingSenderId: "965527348201"
+    };
+    firebase.initializeApp(config);
+  }
+
   render() {
     console.log(this.props.currentNumber);
     return (
@@ -26,7 +42,7 @@ class App extends Component {
 
         <div className="center">
           <NumberLengthSelector />
-          <FactScreen />
+          <FactScreen db={firebase} />
           <NumberStack />
         </div>
 

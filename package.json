@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "array-subtract": "^2.0.0",
+    "firebase": "^4.13.1",
     "lodash": "^4.17.5",
     "radium": "^0.24.0",
     "react": "^16.3.1",

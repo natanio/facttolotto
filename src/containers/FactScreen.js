@@ -58,7 +58,7 @@ class FactScreen extends Component {
             Would you like us to email your numbers and facts?
           </p>
           
-          <EmailForm />
+          <EmailForm db={this.props.db} />
 
           <div className="startOver">
             <button
