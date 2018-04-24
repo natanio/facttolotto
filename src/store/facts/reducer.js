@@ -23,10 +23,6 @@ export default function reduce(state = initialState, action = {}) {
         currentFilter: action.fact.type,
         currentFact: action.fact,
       });
-    // case types.FILTER_CHANGED:
-    //   return state.merge({
-    //     currentFilter: action.filter
-    //   });
     default:
       return state;
   }

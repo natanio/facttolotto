@@ -55,7 +55,7 @@ class FactScreen extends Component {
         <div style={styles.fadeInUp} className={`NumberFilledWrap ${this.props.numberIsFilled ? '' : 'hidden' }`}>
           <h2>Your numbers are ready!</h2>
           <p>
-            Would you like us to email your numbers and facts?
+            Would you like us to email your numbers and facts? No spam, ever – we don't do that.
           </p>
           
           <EmailForm db={this.props.db} />
@@ -130,6 +130,8 @@ class FactScreen extends Component {
 
   onHandleStartOver(event) {
     console.log('start over!');
+    this.props.dispatch(numbersActions.startOver());
+    this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
 
 }
@@ -149,7 +151,7 @@ function mapStateToProps(state) {
     currentFact,
     currentFactStack,
     generatedNumber,
-    numberIsFilled: remainingStackLength == 0
+    numberIsFilled: remainingStackLength === 0
   };
 }
 

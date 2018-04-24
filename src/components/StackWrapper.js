@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
+import FaSync from 'react-icons/lib/fa/refresh';
 
 export default class StackWrapper extends Component {
   constructor(props) {
@@ -16,16 +17,24 @@ export default class StackWrapper extends Component {
   render() {
     console.log('Props in StackWrapper');
     console.log(this.props.currentStackFacts);
+
+    const blankSlate = this.props.maxStackLength === this.props.remainingStackLength;
+    const numberFilled = this.props.remainingStackLength === 0;
+
     return (
       <div className="StackWrapper">
-        <h2>Your lotto numbers <small>(filled after you click 'use')</small></h2>
+        <h2>
+          Your lotto numbers 
+          <small class={!blankSlate ? 'hidden': ''}>(filled after you click 'use')</small> 
+          {numberFilled ? <button className="btn btn-small btn-plain" onClick={this.props.onShuffleClick}>Shuffle <FaSync /></button> : ''}
+        </h2>
         <ul className="StackNumbers">
           {_.times(this.props.maxStackLength, this.renderNumberContainer)}
         </ul>
-        <h3>Facts from your numbers</h3>
+        {blankSlate ? '' : <div><h3>Facts from your numbers</h3>
         <ul className="StackFacts">
           {_.map(this.props.currentStackFacts, this.renderItemById)}
-        </ul>
+        </ul></div> }
       </div>
     );
   }

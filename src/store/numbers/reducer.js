@@ -64,6 +64,21 @@ export default function reduce(state = initialState, action = {}) {
         remainingStackLength: calculatedRemainingStack < 0 ? 0 : calculatedRemainingStack,
       });
       return state.merge(currentStackFacts);
+    case types.SHUFFLE:
+      return state.merge({
+        stackNumbers: action.newStack
+      });
+    case types.START_OVER:
+      const blankState = Immutable({
+        maxStackLength: 5,
+        minStackValue: 1,
+        maxStackValue: 70,
+        currentStackFacts: {},
+        remainingStackLength: 5,
+        stackNumbers: [],
+        generatedNumber: 0,
+      });
+      return state.merge(blankState);
     default:
       return state;
   }

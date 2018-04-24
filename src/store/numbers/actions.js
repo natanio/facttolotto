@@ -29,3 +29,35 @@ export function generateRandomNumberFromState() {
     }
   );
 }
+
+/**
+ * Shuffles array in place.
+ * @param {Array} a items An array containing the items.
+ */
+export function shuffle(a) {
+  // Create a new array first since the stack is immutable
+  let array = [];
+  for (i = a.length - 1; i >= 0; i--) {
+    array.push(a[i]);
+  }
+  // Now loop through that array to shuffle
+  var j, x, i;
+  for (i = array.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = array[i];
+      array[i] = array[j];
+      array[j] = x;
+  }
+  console.log('shuffled stack:');
+  console.log(array);
+  return ({ type: types.SHUFFLE, newStack: array });
+}
+
+export function startOver() {
+  return(
+    {
+      type: types.START_OVER,
+      payload: true
+    }
+  );
+}

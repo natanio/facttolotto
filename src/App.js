@@ -11,7 +11,7 @@ import './App.css';
 const meta = {
   title: 'Online Lottery Number Generator | Fact to Lotto',
   description: 'Generate random lotter numbers and learn trivia at the same time. Try this fun online lottery number generator today.',
-  canonical: 'http://facttolott.com',
+  canonical: 'http://facttolotto.com',
   meta: {
       charset: 'utf-8',
       name: {

@@ -7,14 +7,21 @@ import * as numbersActions from '../store/numbers/actions';
 import * as numbersSelectors from '../store/numbers/reducer';
 
 class NumberStack extends Component {
+  constructor(props) {
+    super(props);
+    autoBind(this);
+  }
+
   render() {
     return (
       <StackWrapper
         maxStackLength={this.props.maxStackLength}
+        remainingStackLength={this.props.remainingStackLength}
         stackNumbers={this.props.stackNumbers}
         renderStackNumber={this.renderStackNumber}
         currentStackFacts={this.props.currentStackFacts}
         renderStackItem={this.renderStackItem}
+        onShuffleClick={this.onShuffleClick}
       />
     );
   }
@@ -44,10 +51,14 @@ class NumberStack extends Component {
       </li>
     );
   }
+
+  onShuffleClick() {
+    this.props.dispatch(numbersActions.shuffle(this.props.stackNumbers));
+  }
 }
 
 function mapStateToProps(state) {
-  const { maxStackLength, currentStackFacts, stackNumbers } = numbersSelectors.getCurrentNumberSettings(state);
+  const { maxStackLength, currentStackFacts, stackNumbers, remainingStackLength } = numbersSelectors.getCurrentNumberSettings(state);
   // const stackNumbers = numbersSelectors.getCurrentStackNumbers(state);
   console.log('current stack facts:');
   console.log(currentStackFacts);
@@ -56,7 +67,8 @@ function mapStateToProps(state) {
   return {
     maxStackLength,
     currentStackFacts,
-    stackNumbers
+    stackNumbers,
+    remainingStackLength
   };
 }
 
