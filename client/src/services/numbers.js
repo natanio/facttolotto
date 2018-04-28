@@ -10,7 +10,7 @@ class NumberService {
 
   async getFact(number, category) {
     console.log(`going to get this number: ${number} in ${category} at ${NUMBER_ENDPOINT}/${number}/${category}?notfound=floor&json`);
-    const url = `${NUMBER_ENDPOINT}/${number}/${category}?json`;
+    const url = `${NUMBER_ENDPOINT}/${number}/${category}?notfound=floor&json`;
     const response = await fetch(url, {
       method: 'GET',
       headers: {
