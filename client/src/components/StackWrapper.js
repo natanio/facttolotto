@@ -24,8 +24,7 @@ export default class StackWrapper extends Component {
     return (
       <div className="StackWrapper">
         <h2>
-          Your lotto numbers 
-          <small class={!blankSlate ? 'hidden': ''}>(filled after you click 'use')</small> 
+          Your lotto numbers <small class={!blankSlate ? 'hidden': ''}>(filled after you click 'use')</small> 
           {numberFilled ? <button className="btn btn-small btn-plain" onClick={this.props.onShuffleClick}>Shuffle <FaSync /></button> : ''}
         </h2>
         <ul className="StackNumbers">
