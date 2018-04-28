@@ -326,7 +326,7 @@ li.StackItem span {
 .errorMsg {
   display: none;
   color: #ff9494;
-  margin: 8px 0;
+  margin: 8px 20px;
 }
 
 .startOver {
