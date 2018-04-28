@@ -189,6 +189,8 @@ button.emailBtn:hover {
 /* FORM */
 .NumberSettingsWrap {
   padding: 1em;
+  max-width: 400px;
+  margin: 0 auto;
   background: #FDFFFC;
   -webkit-box-shadow: 1px 2px 0 3px #41EAD4;
           box-shadow: 1px 2px 0 3px #41EAD4;
@@ -436,6 +438,7 @@ footer ul li {
   }
 
   .NumberSettingsWrap {
+    max-width: unset;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
