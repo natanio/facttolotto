@@ -33,11 +33,11 @@ export default function reduce(state = initialState, action = {}) {
           });
         case 'minStackValue':
           return state.merge({
-            minStackValue: action.setting.value,
+            minStackValue: parseInt(action.setting.value),
           });
         case 'maxStackValue':
           return state.merge({
-            maxStackValue: action.setting.value,
+            maxStackValue: parseInt(action.setting.value),
           });
       }
     case types.GENERATE_NUMBER:

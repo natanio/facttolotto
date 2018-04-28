@@ -19,6 +19,23 @@ class NumberLengthSelector extends Component {
     if (value < 1) {
       alert("Can't be less than 1.");
       return false;
+    } else if (value > 7) {
+      alert("The max number is 7.");
+      return;
+    }
+    this.props.dispatch(numbersActions.updateNumbersSettings(id, value));
+  }
+
+  updateMinMaxSettings(event) {
+    console.log(`new number length: ${event}`)
+    console.log(event.target.data_target);
+    let { id, value } = event.target;
+    if (value < 1) {
+      alert("Can't be less than 1.");
+      return false;
+    } else if (value > 99) {
+      alert("Can't be more than 99");
+      return;
     }
     this.props.dispatch(numbersActions.updateNumbersSettings(id, value));
   }
@@ -45,7 +62,7 @@ class NumberLengthSelector extends Component {
                 type="number"
                 id="minStackValue" 
                 value={minStackValue}
-                onChange={this.updateNumberSettings}/>
+                onChange={this.updateMinMaxSettings}/>
               <label htmlFor="numberMin">min</label>
             </div>
             <div>
@@ -53,7 +70,7 @@ class NumberLengthSelector extends Component {
                 type="number" 
                 id="maxStackValue"
                 value={maxStackValue}
-                onChange={this.updateNumberSettings}/>
+                onChange={this.updateMinMaxSettings}/>
               <label htmlFor="numberMax">max</label>
             </div>
           </div>

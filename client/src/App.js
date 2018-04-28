@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 import * as numbersSelectors from './store/numbers/reducer';
 import FactScreen from './containers/FactScreen';
+import Footer from './components/Footer';
 import NumberLengthSelector from './containers/NumberLengthSelector';
 import NumberStack from './containers/NumberStack';
 import './App.css';
 
 const meta = {
-  title: 'Online Lottery Number Generator | Fact to Lotto',
+  title: 'Online Lottery Number Generator | Factto Lotto',
   description: 'Generate random lotter numbers and learn trivia at the same time. Try this fun online lottery number generator today.',
   canonical: 'http://facttolotto.com',
   meta: {
@@ -60,6 +61,7 @@ class App extends Component {
           <NumberLengthSelector />
           <FactScreen db={firebase} />
           <NumberStack />
+          <Footer />
         </div>
 
         <div className="right">

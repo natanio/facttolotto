@@ -35,6 +35,7 @@ class NumberService {
     console.log(`highest number: ${highestNumber}`);
     let drawnNumber = Math.floor(Math.random() * (highestNumber - minStackValue +1)) + minStackValue;
     let finalNumber = this.confirmNumberIsInRange(minStackValue, maxStackValue, drawnNumber, state);
+    console.log(`Drawn number is: ${drawnNumber}`)
     return parseInt(finalNumber);
   }
 
@@ -71,7 +72,7 @@ class NumberService {
     // determine what number of digits are allowed
     // based on the user input. 1-70 would allow 1 and two digit numbers up to 70.
     // But 10-70 would only allow two digit numbers up to 70
-    const { maxStackLength, minStackValue, maxStackValue } = state;
+    const { maxStackLength, minStackValue, maxStackValue, stackNumbers } = state;
     const allowedDigitLength = this.allowedDigitLength(minStackValue, maxStackValue);
   
     // Placeholder for numbers
@@ -94,7 +95,8 @@ class NumberService {
     if (onlyInMinMaxRange) {
       if (
         parseInt(combinedNumber) >= minStackValue &&
-        parseInt(combinedNumber) <= maxStackValue
+        parseInt(combinedNumber) <= maxStackValue &&
+        !stackNumbers.includes(combinedNumber)
       ) formattedNumbers.push(combinedNumber);
     }
     else formattedNumbers.push(combinedNumber);
@@ -113,7 +115,8 @@ class NumberService {
         if (onlyInMinMaxRange) {
           if (
             parseInt(combinedNumber) >= minStackValue &&
-            parseInt(combinedNumber) <= maxStackValue
+            parseInt(combinedNumber) <= maxStackValue &&
+            !stackNumbers.includes(combinedNumber)
           ) formattedNumbers.push(combinedNumber);
         }
         else formattedNumbers.push(combinedNumber);
@@ -124,7 +127,8 @@ class NumberService {
         if (onlyInMinMaxRange) {
           if (
             parseInt(combinedNumber) >= minStackValue &&
-            parseInt(combinedNumber) <= maxStackValue
+            parseInt(combinedNumber) <= maxStackValue &&
+            !stackNumbers.includes(combinedNumber)
           ) formattedNumbers.push(combinedNumber);
         }
         else formattedNumbers.push(combinedNumber);
