@@ -3,6 +3,7 @@ import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import * as usersActions from '../store/users/actions';
 import * as userSelectors from '../store/users/reducer';
+import * as numberSelectors from '../store/numbers/reducer';
 
 class EmailForm extends Component {
   constructor(props) {
@@ -56,17 +57,42 @@ class EmailForm extends Component {
   }
 
   onSendClick() {
-    let {user_email} = this.props;
+    let {user_email, stackNumbers, currentStackFacts} = this.props;
     let dbCon = this.props.db.database().ref();    
 
-    dbCon.child("users").orderByChild("email").equalTo(user_email).once("value",snapshot => {
-      const userData = snapshot.val();
-      if (userData){
-        return;
-      }
-      dbCon.child('users').push({
+    // Send the email first
+    fetch('/api/email', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         email: user_email,
-      });
+        numbers: stackNumbers,
+        facts: currentStackFacts
+      })
+    })
+    .then(res => res.json())
+    .then(json => {
+      if (json.errors) {
+        console.log('We had a problem, Houston');
+      } else {
+
+        // Then check if we should save this as a new email in firebase
+        dbCon.child("users").orderByChild("email").equalTo(user_email).once("value",snapshot => {
+          const userData = snapshot.val();
+          if (userData){
+            return;
+          }
+          dbCon.child('users').push({
+            email: user_email,
+          });
+        });
+        
+        // TODO: need to show a confirmation message
+        //this.props.dispatch(usersActions.updateInputEmail(''));
+      }
     });
   }
 }
@@ -81,9 +107,12 @@ function validate(email) {
 }
 
 function mapStateToProps(state) {
+  const { currentStackFacts, stackNumbers } = numberSelectors.getCurrentNumberSettings(state);
   return {
     user_email: userSelectors.getUserEmail(state),
     touched: userSelectors.getTouched(state),
+    stackNumbers: stackNumbers,
+    currentStackFacts: currentStackFacts
   }
 }
 

@@ -7,6 +7,9 @@ import App from './App';
 import './index.css';
 
 import * as reducers from './store/reducers';
+
+require('dotenv').config();
+
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
 ReactDOM.render(
