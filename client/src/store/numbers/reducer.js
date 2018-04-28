@@ -48,7 +48,7 @@ export default function reduce(state = initialState, action = {}) {
     case types.ADD_NUMBER_FACT_TO_STACK:
       // Process the number to be added to the stack fitting the
       // user's requirements
-      const stackNumbers = Immutable(state.stackNumbers).concat(numberService.formatStackNumber(state, action.number));
+      const stackNumbers = Immutable(state.stackNumbers).concat(numberService.formatStackNumber(state, action.number, true));
       console.log(`remaining stack: ${state.remainingStackLength}`);
       console.log(`stack length: ${stackNumbers.length}`);
       console.log(`state stack length: ${state.stackNumbers.length}`);
