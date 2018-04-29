@@ -24,7 +24,7 @@ app.post('/api/email', (req, res) => {
   }
   // Set up the SendGrid helper
   var helper = require('sendgrid').mail;
-  var from_email = new helper.Email('natanio@gmail.com');
+  var from_email = new helper.Email('no-reply@facttolotto.com');
   var to_email = new helper.Email(req.body.email);
   var subject = 'Your Factto Lotto numbers and facts!';
   var numbers = req.body.numbers.join(', ');
