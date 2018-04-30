@@ -35,10 +35,7 @@ class FactScreen extends Component {
   }
 
   componentDidMount() {
-    console.log('mounted');
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
-    console.log('mounted props');
-    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps){
@@ -65,7 +62,7 @@ class FactScreen extends Component {
               className="btn"
               onClick={this.onHandleStartOver}
             >
-              New number
+              Start over?
             </button>
           </div>
         </div>
@@ -91,7 +88,6 @@ class FactScreen extends Component {
   }
 
   renderLoading() {
-    console.log('loading...');
     return (
       <p>Loading...</p>
     );
@@ -112,12 +108,10 @@ class FactScreen extends Component {
   onFilterClick(category) {
     const { number } = this.props.currentFact;
     this.props.dispatch(factsActions.fetchFact(number, category));
-    console.log(`update the fact with ${number} and ${category}`);
   }
 
   onAddToStackClick() {
     const { number, text } = this.props.currentFact;
-    console.log(`Stack number is: ${number}, with text: ${text}`);
     this.props.dispatch(numbersActions.addNumberFactToStack(number, text));
     // this.props.dispatch(factsActions.fetchFact());
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
@@ -129,7 +123,6 @@ class FactScreen extends Component {
   }
 
   onHandleStartOver(event) {
-    console.log('start over!');
     this.props.dispatch(numbersActions.startOver());
     this.props.dispatch(numbersActions.generateRandomNumberFromState());
   }
@@ -139,11 +132,6 @@ class FactScreen extends Component {
 // which props do we want to inject, given the global store state?
 // always use selectors here and avoid accessing the state directly
 function mapStateToProps(state) {
-  console.log('mapping props');
-  console.log(state);
-  console.log(factsSelectors.getFact(state));
-  console.log('Getting number settings');
-  console.log(numbersSelectors.getCurrentNumberSettings(state));
   const { currentFilter, currentFact } = factsSelectors.getFact(state);
   const { currentFactStack, generatedNumber, remainingStackLength } = numbersSelectors.getCurrentNumberSettings(state);
   return {

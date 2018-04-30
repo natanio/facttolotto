@@ -28,8 +28,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    console.log('app props')
-    console.log(this.props)
     autoBind(this);
 
     // Initialize Firebase
@@ -53,20 +51,15 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // Save user in state
-        console.log('before save user')
         this.props.dispatch(usersActions.authenticate(true));
       } else {
         // User is signed out.
-        console.log('before sign out')
         this.props.dispatch(usersActions.authenticate(false));
       }
-      console.log('user is');
-      console.log(user);
     });
   }
 
   render() {
-    console.log(this.props.currentNumber);
     return (
       <div className="container">
         <DocumentMeta {...meta} />
