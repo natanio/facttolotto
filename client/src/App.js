@@ -19,6 +19,7 @@ const meta = {
   meta: {
       charset: 'utf-8',
       name: {
+        description: 'Generate random lotter numbers and learn trivia at the same time. Try this fun online lottery number generator today.',
           keywords: 'lottery number generator, loterry numbers, trivia, facts, random number generator'
       }
   }
