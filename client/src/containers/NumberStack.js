@@ -27,8 +27,6 @@ class NumberStack extends Component {
   }
 
   renderStackNumber(key, number) {
-    console.log('Stack number:');
-    console.log(number);
     return (
       <li
         key={key}
@@ -39,8 +37,6 @@ class NumberStack extends Component {
   }
 
   renderStackItem(number, fact) {
-    // console.log('Stack item:');
-    // console.log(fact);
     return(
       <li
         className="StackItem"
@@ -59,11 +55,7 @@ class NumberStack extends Component {
 
 function mapStateToProps(state) {
   const { maxStackLength, currentStackFacts, stackNumbers, remainingStackLength } = numbersSelectors.getCurrentNumberSettings(state);
-  // const stackNumbers = numbersSelectors.getCurrentStackNumbers(state);
-  console.log('current stack facts:');
-  console.log(currentStackFacts);
-  console.log('current stack numbers');
-  console.log(stackNumbers);
+
   return {
     maxStackLength,
     currentStackFacts,

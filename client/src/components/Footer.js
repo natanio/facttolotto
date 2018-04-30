@@ -14,8 +14,6 @@ export default class Footer extends Component {
   }
 
   renderBtnById(id) {
-    console.log('rendering list items');
-    console.log(id);
     if (typeof this.props.renderItem === 'function') {
       return this.props.renderItem(id);
     }

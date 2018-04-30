@@ -34,14 +34,12 @@ export default class Card extends Component {
 
   onClick() {
     if (typeof this.props.addToStack === 'function') {
-      console.log('add btn was clicked');
       this.props.addToStack();
     }
   }
 
   nextNumber() {
     if (typeof this.props.nextNumberClick === 'function') {
-      console.log('next number clicked');
       this.props.nextNumberClick();
     }
   }

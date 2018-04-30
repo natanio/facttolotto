@@ -20,9 +20,7 @@ export default class ListItem extends Component {
   }
 
   onClick() {
-    console.log('click happened');
     if (typeof this.props.onClick === 'function') {
-      console.log(this.props.text);
       this.props.onClick(this.props.text);
     }
   }

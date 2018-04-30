@@ -17,11 +17,8 @@ const initialState = Immutable({
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case types.NUMBER_SETTINGS_CHANGED:
-      console.log(state);
-      console.log(`action:`, action)
       switch (action.setting.target) {
         case 'numberLength':
-          console.log(`stack length is: ${state.currentStackFacts}`);
           if (_.size(state.currentStackFacts) > 0) {
             if (!window.confirm('This action will remove your current numbers. Are you sure?')) return state;
           }
@@ -49,12 +46,7 @@ export default function reduce(state = initialState, action = {}) {
       // Process the number to be added to the stack fitting the
       // user's requirements
       const stackNumbers = Immutable(state.stackNumbers).concat(numberService.formatStackNumber(state, action.number, true));
-      console.log(`remaining stack: ${state.remainingStackLength}`);
-      console.log(`stack length: ${stackNumbers.length}`);
-      console.log(`state stack length: ${state.stackNumbers.length}`);
       const calculatedRemainingStack = state.remainingStackLength - stackNumbers.length + state.stackNumbers.length;
-      console.log('returned stack numbers');
-      console.log(stackNumbers);
       const currentStackFacts = Immutable({
         currentStackFacts: {
           ...state.currentStackFacts,
@@ -87,15 +79,5 @@ export default function reduce(state = initialState, action = {}) {
 // selectors
 
 export function getCurrentNumberSettings(state) {
-  console.log('In numbers reducer');
   return state.numbers;
 }
-
-// export function generateNumber(state) {
-//   console.log('Generating number...');
-//   const generatedNumber = numberService.generateNumber(state);
-//   console.log(generatedNumber);
-//   return state.merge({
-//     generatedNumber: generatedNumber
-//   });
-// }

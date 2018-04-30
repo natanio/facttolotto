@@ -13,8 +13,6 @@ class NumberLengthSelector extends Component {
   }
 
   updateNumberSettings(event) {
-    console.log(`new number length: ${event}`)
-    console.log(event.target.data_target);
     let { id, value } = event.target;
     if (value < 1) {
       alert("Can't be less than 1.");
@@ -27,8 +25,6 @@ class NumberLengthSelector extends Component {
   }
 
   updateMinMaxSettings(event) {
-    console.log(`new number length: ${event}`)
-    console.log(event.target.data_target);
     let { id, value } = event.target;
     if (value < 1) {
       alert("Can't be less than 1.");
@@ -84,8 +80,6 @@ class NumberLengthSelector extends Component {
 // which props do we want to inject, given the global store state?
 // always use selectors here and avoid accessing the state directly
 function mapStateToProps(state) {
-  console.log(`numbers state:`);
-  console.log(state);
   const { maxStackLength, minStackValue, maxStackValue } = numbersSelectors.getCurrentNumberSettings(state);
   return {
     maxStackLength,

@@ -17,8 +17,6 @@ const initialState = Immutable({
 export default function reduce(state = initialState, action = {}) {
   switch (action.type) {
     case types.FACT_FETCHED:
-      console.log(state);
-      console.log(`action:`, action)
       return state.merge({
         currentFilter: action.fact.type,
         currentFact: action.fact,

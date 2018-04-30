@@ -48,8 +48,6 @@ export function shuffle(a) {
       array[i] = array[j];
       array[j] = x;
   }
-  console.log('shuffled stack:');
-  console.log(array);
   return ({ type: types.SHUFFLE, newStack: array });
 }
 

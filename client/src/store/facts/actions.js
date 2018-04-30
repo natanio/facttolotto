@@ -11,26 +11,12 @@ import numberService from '../../services/numbers';
 import * as factsSelectors from '../facts/reducer';
 import * as numbersSelectors from '../numbers/reducer';
 
-// export function fetchRandomFact() {
-//   try {
-//     const fetchPromise = numberService.getFact();
-//     console.log('fact should be fetched');
-//     const fact = await fetchPromise;
-//     console.log(`fact: ${fact}`);
-//     dispatch({ type: types.RANDOM_FETCHED, fact });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
 
 export function fetchFact(number, category = 'trivia') {
-  console.log('fetching the fact');
   return async(dispatch) => {
     try {
       const fetchPromise = numberService.getFact(number, category);
-      console.log('fact should be fetched');
       const fact = await fetchPromise;
-      console.log(`fact: ${fact}`);
       dispatch({ type: types.FACT_FETCHED, fact });
     } catch (error) {
       console.error(error);
