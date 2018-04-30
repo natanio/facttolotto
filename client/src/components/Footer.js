@@ -7,7 +7,7 @@ export default class Footer extends Component {
       <footer>
         <ul>
           <li>Copyright &copy; {(new Date()).getFullYear()} Factto Lotto</li>
-          <li>Facts supplied by <a href="http://www.numbersapi.com" target="_blank">Numbers API</a></li>
+          <li>Facts supplied by <a href="http://www.numbersapi.com" target="_blank" rel="noopener noreferrer">Numbers API</a></li>
         </ul>
       </footer>
     );

@@ -5,11 +5,8 @@
 //  sync thunks - when you have substantial business logic but it's not async
 //  plain object actions - when you just send a plain action to the reducer
 
-import _ from 'lodash';
 import * as types from './actionTypes';
 import numberService from '../../services/numbers';
-import * as factsSelectors from '../facts/reducer';
-import * as numbersSelectors from '../numbers/reducer';
 
 
 export function fetchFact(number, category = 'trivia') {

@@ -15,8 +15,6 @@ import * as factsActions from '../store/facts/actions';
 import * as factsSelectors from '../store/facts/reducer';
 import * as numbersActions from '../store/numbers/actions';
 import * as numbersSelectors from '../store/numbers/reducer';
-import * as usersActions from '../store/users/actions';
-import * as userSelectors from '../store/users/reducer';
 import { fadeInUp } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 

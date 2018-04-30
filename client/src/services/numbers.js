@@ -24,7 +24,7 @@ class NumberService {
   }
 
   generateNumber(state) {
-    const { maxStackLength, minStackValue, maxStackValue, remainingStackLength } = state;
+    const { minStackValue, maxStackValue, remainingStackLength } = state;
     const maxNumberDigits = this.allowedDigitLength(minStackValue, maxStackValue);
     const maxLengthOfGeneratedNumber = remainingStackLength * maxNumberDigits >= 5 ? 5 : remainingStackLength * maxNumberDigits;
     const highestNumber = _.times(maxLengthOfGeneratedNumber, () => { return 9 }).join('');
@@ -62,13 +62,11 @@ class NumberService {
     // determine what number of digits are allowed
     // based on the user input. 1-70 would allow 1 and two digit numbers up to 70.
     // But 10-70 would only allow two digit numbers up to 70
-    const { maxStackLength, minStackValue, maxStackValue, stackNumbers } = state;
+    const { minStackValue, maxStackValue, stackNumbers } = state;
     const allowedDigitLength = this.allowedDigitLength(minStackValue, maxStackValue);
   
     // Placeholder for numbers
-    let numbers = [];
     let formattedNumbers = [];
-    let leftoverNumbers = [];
 
     // formatNumber(number);
     let splitNumber = number.toString().split('');
@@ -76,7 +74,6 @@ class NumberService {
     let numbersToCombine = splitNumber.slice(0, allowedDigitLength);
     let combinedNumber = numbersToCombine.join('');
     // let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
-    let usedNumbers = splitNumber.splice(0,numbersToCombine.length); // to track used numbers
     let unusedNumbers = splitNumber; // for easy reading
 
     if (onlyInMinMaxRange) {

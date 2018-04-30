@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import './FactScreen.css';
-import Card from '../components/Card';
 import * as numbersActions from '../store/numbers/actions';
 import * as numbersSelectors from '../store/numbers/reducer';
 

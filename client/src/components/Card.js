@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import autoBind from 'react-autobind';
-import * as NumberFormat from 'react-number-format';
 import './Card.css';
 
 export default class Card extends Component {

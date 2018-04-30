@@ -36,12 +36,12 @@ export function generateRandomNumberFromState() {
  */
 export function shuffle(a) {
   // Create a new array first since the stack is immutable
+  var j, x, i;
   let array = [];
   for (i = a.length - 1; i >= 0; i--) {
     array.push(a[i]);
   }
   // Now loop through that array to shuffle
-  var j, x, i;
   for (i = array.length - 1; i > 0; i--) {
       j = Math.floor(Math.random() * (i + 1));
       x = array[i];

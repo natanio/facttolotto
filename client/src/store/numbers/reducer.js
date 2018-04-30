@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 import _ from 'lodash';
-import ArraySubtract from 'array-subtract';
 import numberService from '../../services/numbers';
 
 const initialState = Immutable({
@@ -36,7 +35,10 @@ export default function reduce(state = initialState, action = {}) {
           return state.merge({
             maxStackValue: parseInt(action.setting.value),
           });
+        default:
+          return state;
       }
+      break;
     case types.GENERATE_NUMBER:
       const generatedNumber = numberService.generateNumber(state);
       return state.merge({

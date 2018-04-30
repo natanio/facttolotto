@@ -4,10 +4,8 @@
 // the other exports in this file are selectors, which is business logic that digests parts of the store's state
 // for easier consumption by views
 
-import _ from 'lodash';
 import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
-import numberService from '../../services/numbers';
 
 const initialState = Immutable({
   currentFilter: undefined,
