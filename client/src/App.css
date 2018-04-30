@@ -348,6 +348,18 @@ li.StackItem span {
   font-weight: 400;
 }
 
+.emailConfirmation {
+  background: #0cb13f;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: 50%;
+  min-width: 320px;
+  color: white;
+  position: absolute;
+  left: 18px;
+  top: -36px;
+}
+
 /* USER EMAIL INPUT */
 .NumberFilledWrap {
   margin: 50px 0;
@@ -385,6 +397,7 @@ li.StackItem span {
 
 .inlineFormGroup {
   width: 100%;
+  position: relative;
 }
 
 .errorMsg {

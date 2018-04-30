@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import * as usersActions from '../store/users/actions';
 import * as userSelectors from '../store/users/reducer';
 import * as numberSelectors from '../store/numbers/reducer';
+import { fadeInUpBig } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+  fadeInUpBig: {
+    animation: 'fadeInUpBig 500ms',
+    animationName: Radium.keyframes(fadeInUpBig, 'fadeInUpBig')
+  }
+};
 
 class EmailForm extends Component {
   constructor(props) {
@@ -11,8 +20,16 @@ class EmailForm extends Component {
     autoBind(this);
   }
 
+  componentDidUpdate() {
+    if (this.props.emailSent) {
+      setTimeout(function() { 
+        this.props.dispatch(usersActions.showEmailSentConfirmation(false));
+        this.forceUpdate(); 
+      }.bind(this), 5000);
+    }
+  }
+
   render () {
-    
     const errors = validate(this.props.user_email);
     const isEnabled = this.props.user_email ? !Object.keys(errors).some(x => errors[x]) : false;
     const shouldMarkError = (field) => {
@@ -24,6 +41,7 @@ class EmailForm extends Component {
 
     return (
       <div className="inlineFormGroup">
+        <div style={styles.fadeInUpBig} className={this.props.emailSent ? 'emailConfirmation' : 'emailConfirmation hidden'}>Your email was sent!</div>
         <input
           className={shouldMarkError('email') ? "error" : ""}
           type="text" 
@@ -44,16 +62,12 @@ class EmailForm extends Component {
   }
 
   onHandleEmailChange(event) {
-    console.log(`user email is: ${event}`)
-    console.log(event.target.value);
     let { value } = event.target;
     this.props.dispatch(usersActions.updateInputEmail(value));
   }
 
   handleBlur = (field) => (evt) => {
     this.props.dispatch(usersActions.updateTouchedState(field))
-    console.log('after blur');
-    console.log(this.props);
   }
 
   onSendClick() {
@@ -80,25 +94,26 @@ class EmailForm extends Component {
       } else {
 
         // Then check if we should save this as a new email in firebase
-        dbCon.child("users").orderByChild("email").equalTo(user_email).once("value",snapshot => {
-          const userData = snapshot.val();
-          if (userData){
-            return;
-          }
-          dbCon.child('users').push({
-            email: user_email,
+        if (this.props.isAuthenticated) {
+          dbCon.child("users").orderByChild("email").equalTo(user_email).once("value",snapshot => {
+            const userData = snapshot.val();
+            if (userData){
+              return;
+            }
+            dbCon.child('users').push({
+              email: user_email,
+            });
           });
-        });
+        }
         
-        // TODO: need to show a confirmation message
-        //this.props.dispatch(usersActions.updateInputEmail(''));
+        // Show a confirmation message
+        this.props.dispatch(usersActions.showEmailSentConfirmation(true));
       }
     });
   }
 }
 
 function validate(email) {
-  console.log(`type of email? ${typeof email}`);
   if (typeof email === 'undefined') return true;
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return {
@@ -108,11 +123,13 @@ function validate(email) {
 
 function mapStateToProps(state) {
   const { currentStackFacts, stackNumbers } = numberSelectors.getCurrentNumberSettings(state);
+  const emailSent = userSelectors.emailSent(state);
   return {
     user_email: userSelectors.getUserEmail(state),
     touched: userSelectors.getTouched(state),
     stackNumbers: stackNumbers,
-    currentStackFacts: currentStackFacts
+    currentStackFacts: currentStackFacts,
+    emailSent: emailSent
   }
 }
 

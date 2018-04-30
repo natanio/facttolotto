@@ -1,2 +1,4 @@
 export const INPUT_EMAIL_CHANGED = 'users.INPUT_EMAIL_CHANGED';
 export const TOUCHED_STATE_UPDATED = 'users.TOUCHED_STATE_UPDATED';
+export const EMAIL_SENT = 'users.EMAIL_SENT';
+export const AUTHORIZE_USER = 'users.AUTHORIZE_USER';

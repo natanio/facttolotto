@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DocumentMeta from 'react-document-meta';
+import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import * as numbersSelectors from './store/numbers/reducer';
@@ -7,6 +8,8 @@ import FactScreen from './containers/FactScreen';
 import Footer from './components/Footer';
 import NumberLengthSelector from './containers/NumberLengthSelector';
 import NumberStack from './containers/NumberStack';
+import * as usersActions from './store/users/actions';
+import * as userSelectors from './store/users/reducer';
 import './App.css';
 
 const meta = {
@@ -21,11 +24,14 @@ const meta = {
   }
 };
 
-
 class App extends Component {
 
   constructor(props) {
     super(props);
+    console.log('app props')
+    console.log(this.props)
+    autoBind(this);
+
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyAB16E2an2dnvBjuItirPhV4dFJwnGRbgA",
@@ -36,6 +42,27 @@ class App extends Component {
       messagingSenderId: "965527348201"
     };
     firebase.initializeApp(config);
+
+    // Authorize visitor in anonymously with firebase
+    firebase.auth().signInAnonymously().catch(function(error) {
+      console.error(error);
+    });
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // Save user in state
+        console.log('before save user')
+        this.props.dispatch(usersActions.authenticate(true));
+      } else {
+        // User is signed out.
+        console.log('before sign out')
+        this.props.dispatch(usersActions.authenticate(false));
+      }
+      console.log('user is');
+      console.log(user);
+    });
   }
 
   render() {
@@ -59,7 +86,7 @@ class App extends Component {
         <div className="center">
           <h1>Online Lottery Number Generator</h1>
           <NumberLengthSelector />
-          <FactScreen db={firebase} />
+          <FactScreen db={firebase} isAuthenticated={this.props.isAuthenticated}/>
           <NumberStack />
           <Footer />
         </div>
@@ -74,10 +101,12 @@ class App extends Component {
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
   const { maxStackLength, minStackValue, maxStackValue } = numbersSelectors.getCurrentNumberSettings(state);
+  const isAuthenticated = userSelectors.isAuthenticated(state);
   return {
     maxStackLength,
     minStackValue,
-    maxStackValue
+    maxStackValue,
+    isAuthenticated: isAuthenticated
   };
 }
 

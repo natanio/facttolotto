@@ -17,3 +17,21 @@ export function updateTouchedState(field) {
     }
   )
 }
+
+export function showEmailSentConfirmation(value) {
+  return (
+    {
+      type: types.EMAIL_SENT,
+      value: value
+    }
+  )
+}
+
+export function authenticate(val) {
+  return (
+    {
+      type: types.AUTHORIZE_USER,
+      authenticated: val
+    }
+  )
+}
