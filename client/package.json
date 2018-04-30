@@ -15,7 +15,7 @@
     "react-icons": "^2.2.7",
     "react-number-format": "^3.3.0",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^1.1.4",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "seamless-immutable": "^7.1.3"
