@@ -74,6 +74,7 @@ class NumberService {
     let numbersToCombine = splitNumber.slice(0, allowedDigitLength);
     let combinedNumber = numbersToCombine.join('');
     // let unusedNumbers = subtract.sub(splitNumber, numbersToCombine);
+    let usedNumbers = splitNumber.splice(0,numbersToCombine.length); // to track used numbers
     let unusedNumbers = splitNumber; // for easy reading
 
     if (onlyInMinMaxRange) {
