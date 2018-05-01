@@ -1,6 +1,9 @@
 {
   "name": "numbers",
   "version": "1.0.0",
+  "engines": {
+    "node": "9.2.1"
+  },
   "main": "index.js",
   "author": "natanio <natanio@gmail.com>",
   "license": "MIT",
