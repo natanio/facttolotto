@@ -13,7 +13,7 @@ class NumberLengthSelector extends Component {
 
   updateNumberSettings(event) {
     let { id, value } = event.target;
-    if (value < 1) {
+    if (value < 1 && value !== '') {
       alert("Can't be less than 1.");
       return false;
     } else if (value > 7) {
@@ -21,11 +21,12 @@ class NumberLengthSelector extends Component {
       return;
     }
     this.props.dispatch(numbersActions.updateNumbersSettings(id, value));
+    return;
   }
 
   updateMinMaxSettings(event) {
     let { id, value } = event.target;
-    if (value < 1) {
+    if (value < 1 && value !== '') {
       alert("Can't be less than 1.");
       return false;
     } else if (value > 99) {
@@ -33,6 +34,7 @@ class NumberLengthSelector extends Component {
       return;
     }
     this.props.dispatch(numbersActions.updateNumbersSettings(id, value));
+    return;
   }
 
   render() {
