@@ -8,7 +8,7 @@ const initialState = Immutable({
   minStackValue: 1,
   maxStackValue: 70,
   currentStackFacts: {},
-  remainingStackLength: 5,
+  remainingStackLength: 6,
   stackNumbers: [],
   generatedNumber: 0,
 });
@@ -64,11 +64,11 @@ export default function reduce(state = initialState, action = {}) {
       });
     case types.START_OVER:
       const blankState = Immutable({
-        maxStackLength: 5,
+        maxStackLength: 6,
         minStackValue: 1,
         maxStackValue: 70,
         currentStackFacts: {},
-        remainingStackLength: 5,
+        remainingStackLength: 6,
         stackNumbers: [],
         generatedNumber: 0,
       });

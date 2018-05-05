@@ -27,7 +27,7 @@ class NumberService {
     const { minStackValue, maxStackValue, remainingStackLength } = state;
     const maxNumberDigits = this.allowedDigitLength(minStackValue, maxStackValue);
     let maxLengthOfGeneratedNumber = remainingStackLength * maxNumberDigits >= 5 ? 5 : remainingStackLength * maxNumberDigits;
-    maxLengthOfGeneratedNumber = Math.floor(Math.random() * (maxLengthOfGeneratedNumber - 1 +1)) + 1;
+    maxLengthOfGeneratedNumber = Math.floor(Math.random() * maxLengthOfGeneratedNumber) + 1;
     const highestNumber = _.times(maxLengthOfGeneratedNumber, () => { return 9 }).join('');
     let drawnNumber = Math.floor(Math.random() * (highestNumber - minStackValue +1)) + minStackValue;
     let finalNumber = this.confirmNumberIsInRange(minStackValue, maxStackValue, drawnNumber, state);
