@@ -4,7 +4,7 @@ import _ from 'lodash';
 import numberService from '../../services/numbers';
 
 const initialState = Immutable({
-  maxStackLength: 5,
+  maxStackLength: 6,
   minStackValue: 1,
   maxStackValue: 70,
   currentStackFacts: {},
